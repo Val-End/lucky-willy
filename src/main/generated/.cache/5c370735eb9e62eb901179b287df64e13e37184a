@@ -1,0 +1,4 @@
+// 1.21.1	2025-02-16T02:05:54.255552	Lucky Willy/Block Loot Tables
+dd036359352caadcba5bdc49e24336f3edd66a81 data\lucky-willy\loot_table\blocks\weapon_lucky_block.json
+7707a93e8a5b5bee868b15c699dac31d7678330b data\lucky-willy\loot_table\blocks\armor_lucky_block.json
+aaa560fdb965543d7076830e89078462a727dd75 data\lucky-willy\loot_table\blocks\willy_lucky_block.json

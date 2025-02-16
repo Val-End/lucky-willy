@@ -1,0 +1,118 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_helmet"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_chestplate"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_leggings"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_boots"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_helmet_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_chestplate_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_leggings_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_boots_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_helmet_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_chestplate_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_leggings_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_boots_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_helmet_dragon"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_chestplate_dragon"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_leggings_dragon"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_boots_dragon"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_sword"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_sword_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_sword_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_sword_sniper"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_hammer"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_hammer_nether"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_hammer_end"
+        },
+        {
+          "type": "lucky-willy:identifier",
+          "name": "gobber2:gobber2_staff_sound"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:enchant_with_levels",
+          "levels": {
+            "type": "minecraft:uniform",
+            "max": 39.0,
+            "min": 20.0
+          },
+          "options": "#minecraft:on_random_loot"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}
