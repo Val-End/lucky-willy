@@ -1,4 +1,4 @@
-package net.ethernity.lucky.mixin.client;
+package net.ethernity.lucky.mixin;
 
 import com.mojang.serialization.MapCodec;
 import net.ethernity.lucky.LuckyWilly;

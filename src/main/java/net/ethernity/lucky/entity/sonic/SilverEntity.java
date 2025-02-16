@@ -25,17 +25,12 @@ public class SilverEntity extends AbstractSonicEntity {
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
-    public static DefaultAttributeContainer.Builder createSonicAttributes() {
+    public static DefaultAttributeContainer.Builder createSilverAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12.0f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23F);
-    }
-
-    @Override
-    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0);
     }
 }
