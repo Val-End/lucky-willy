@@ -3,13 +3,13 @@
 	"id": "lucky-willy",
 	"version": "${version}",
 	"name": "Lucky Willy",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Mod de Lucky Blocks hecho para \"Willyrex Minecraft\" ",
 	"authors": [
-		"Me!"
+		"ValEnd__"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://x.com/EthernityEs",
+		"sources": "https://github.com/EthernityStudio/lucky-willy"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/lucky-willy/icon.png",
