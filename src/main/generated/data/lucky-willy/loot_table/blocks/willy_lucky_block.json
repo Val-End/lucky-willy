@@ -86,18 +86,6 @@
         },
         {
           "type": "lucky-willy:identifier",
-          "name": "gobber2:gobber2_hammer"
-        },
-        {
-          "type": "lucky-willy:identifier",
-          "name": "gobber2:gobber2_hammer_nether"
-        },
-        {
-          "type": "lucky-willy:identifier",
-          "name": "gobber2:gobber2_hammer_end"
-        },
-        {
-          "type": "lucky-willy:identifier",
           "name": "gobber2:gobber2_staff_sound"
         }
       ],
