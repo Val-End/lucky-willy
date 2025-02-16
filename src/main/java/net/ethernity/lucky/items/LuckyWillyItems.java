@@ -54,6 +54,11 @@ public class LuckyWillyItems {
             "eggman_spawn_egg"
     );
 
+    public static final Item CUBOT_SPAWN_EGG = register(
+            new SpawnEggItem(LuckyWillyEntities.CUBOT, 0x2b2e35, 0xfce283, new Item.Settings()),
+            "cubot_spawn_egg"
+    );
+
     public static Item register(Item item, String id) {
         Identifier itemID = Identifier.of(LuckyWilly.MOD_ID, id);
         Item registeredItem = Registry.register(Registries.ITEM, itemID, item);
@@ -70,6 +75,7 @@ public class LuckyWillyItems {
             itemGroup.add(LuckyWillyItems.SHADOW_SPAWN_EGG.asItem());
             itemGroup.add(LuckyWillyItems.METAL_SONIC_SPAWN_EGG.asItem());
             itemGroup.add(LuckyWillyItems.EGGMAN_SPAWN_EGG.asItem());
+            itemGroup.add(LuckyWillyItems.CUBOT_SPAWN_EGG.asItem());
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> {

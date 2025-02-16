@@ -17,5 +17,7 @@
   "item.lucky-willy.sonic_robot_spawn_egg": "Metal Sonic Spawn Egg",
   "entity.lucky-willy.sonic_robot": "Metal Sonic",
   "item.lucky-willy.eggman_spawn_egg": "Eggman Spawn Egg",
-  "entity.lucky-willy.eggman": "Eggman"
+  "entity.lucky-willy.eggman": "Eggman",
+  "item.lucky-willy.cubot_spawn_egg": "Cubot Spawn Egg",
+  "entity.lucky-willy.cubot": "Cubot"
 }

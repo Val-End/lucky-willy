@@ -32,5 +32,8 @@ public class LuckyWillyClient implements ClientModInitializer {
 		EntityRendererRegistry.register(LuckyWillyEntities.EGGMAN,
 				(context) -> new BaseSonicRenderer<>(context, "eggman")
 		);
+		EntityRendererRegistry.register(LuckyWillyEntities.CUBOT,
+				(context) -> new BaseSonicRenderer<>(context, "cubot")
+		);
 	}
 }

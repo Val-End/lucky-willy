@@ -9,6 +9,6 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class BaseSonicRenderer<T extends AbstractSonicEntity> extends GeoEntityRenderer<T> {
     public BaseSonicRenderer(EntityRendererFactory.Context renderManager, String id) {
-        super(renderManager, new DefaultedEntityGeoModel<>(Identifier.of(LuckyWilly.MOD_ID, id), true));
+        super(renderManager, new DefaultedEntityGeoModel<>(Identifier.of(LuckyWilly.MOD_ID, id)));
     }
 }

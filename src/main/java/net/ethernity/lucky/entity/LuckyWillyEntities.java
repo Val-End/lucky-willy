@@ -58,6 +58,12 @@ public class LuckyWillyEntities {
             EntityType.Builder.create(EggmanEntity::new, SpawnGroup.CREATURE).dimensions(2.0f, 3.6f).build("eggman")
     );
 
+    public static final EntityType<CubotEntity> CUBOT = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of(LuckyWilly.MOD_ID, "cubot"),
+            EntityType.Builder.create(CubotEntity::new, SpawnGroup.CREATURE).dimensions(0.8f, 1.8f).build("cubot")
+    );
+
     public static void initialize() {
         LuckyWillyEntities.registerAttributes();
     }
@@ -71,5 +77,6 @@ public class LuckyWillyEntities {
         FabricDefaultAttributeRegistry.register(SHADOW, ShadowEntity.createShadowAttributes());
         FabricDefaultAttributeRegistry.register(METAL_SONIC, MetalSonicEntity.createMetalSonicAttributes());
         FabricDefaultAttributeRegistry.register(EGGMAN, EggmanEntity.createEggmanAttributes());
+        FabricDefaultAttributeRegistry.register(CUBOT, CubotEntity.createCubotAttributes());
     }
 }
