@@ -1,23 +1,5 @@
 {
   "block.lucky-willy.weapon_lucky_block": "Weapon Lucky Block",
   "block.lucky-willy.armor_lucky_block": "Armor Lucky Block",
-  "block.lucky-willy.willy_lucky_block": "Willy Lucky Block",
-  "item.lucky-willy.sonic_spawn_egg": "Sonic Spawn Egg",
-  "entity.lucky-willy.sonic": "Sonic",
-  "item.lucky-willy.tails_spawn_egg": "Tails Spawn Egg",
-  "entity.lucky-willy.tails": "Tails",
-  "item.lucky-willy.knuckles_spawn_egg": "Knuckles Spawn Egg",
-  "entity.lucky-willy.knuckles": "Knuckles",
-  "item.lucky-willy.amy_spawn_egg": "Amy Spawn Egg",
-  "entity.lucky-willy.amy": "Amy",
-  "item.lucky-willy.silver_spawn_egg": "Silver Spawn Egg",
-  "entity.lucky-willy.silver": "Silver",
-  "item.lucky-willy.shadow_spawn_egg": "Shadow Spawn Egg",
-  "entity.lucky-willy.shadow": "Shadow",
-  "item.lucky-willy.sonic_robot_spawn_egg": "Metal Sonic Spawn Egg",
-  "entity.lucky-willy.sonic_robot": "Metal Sonic",
-  "item.lucky-willy.eggman_spawn_egg": "Eggman Spawn Egg",
-  "entity.lucky-willy.eggman": "Eggman",
-  "item.lucky-willy.cubot_spawn_egg": "Cubot Spawn Egg",
-  "entity.lucky-willy.cubot": "Cubot"
+  "block.lucky-willy.willy_lucky_block": "Willy Lucky Block"
 }
