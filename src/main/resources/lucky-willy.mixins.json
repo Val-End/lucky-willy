@@ -3,7 +3,7 @@
 	"package": "net.ethernity.lucky.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [],
-	"mixins": [ "LootPoolEntryTypesMixin" ],
+	"mixins": [],
 	"injectors": {
 		"defaultRequire": 1
 	}

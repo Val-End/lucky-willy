@@ -13,26 +13,9 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class LuckyWilllyBlocks {
-    public static final Block WEAPON_LUCKY_BLOCK = register(
-            new Block(AbstractBlock.Settings.create()
-                    .sounds(BlockSoundGroup.METAL)
-                    .strength(0.2F, 1200.0F)
-            ),
-            "weapon_lucky_block",
-            true
-    );
-
-    public static final Block ARMOR_LUCKY_BLOCK = register(
-            new Block(AbstractBlock.Settings.copy(WEAPON_LUCKY_BLOCK)),
-            "armor_lucky_block",
-            true
-    );
-
-    public static final Block WILLY_LUCKY_BLOCK = register(
-            new Block(AbstractBlock.Settings.copy(WEAPON_LUCKY_BLOCK)),
-            "willy_lucky_block",
-            true
-    );
+    public static final Block WEAPON_LUCKY_BLOCK = register(new WeaponLuckyBlock(), "weapon_lucky_block", true);
+    public static final Block ARMOR_LUCKY_BLOCK = register(new ArmorLuckyBlock(), "armor_lucky_block", true);
+    public static final Block WILLY_LUCKY_BLOCK = register(new WillyLuckyBlock(), "willy_lucky_block", true);
 
     public static Block register(Block block, String name, boolean shouldRegisterItem) {
         Identifier id = Identifier.of(LuckyWilly.MOD_ID, name);
