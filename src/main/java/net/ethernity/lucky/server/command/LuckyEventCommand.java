@@ -74,8 +74,8 @@ public class LuckyEventCommand {
             throw INVALID_POSITION_EXCEPTION.create();
 
         for (ServerPlayerEntity entity : targets) {
-            event.value().execute(blockPos, source.getWorld(), source.getPlayer());
-            source.sendFeedback(() -> Text.translatable("commands.lucky-event.success", entity.getDisplayName()), true);
+            event.value().execute(blockPos, source.getWorld(), entity);
+            source.sendFeedback(() -> Text.translatable("commands.lucky-event.success", event.getIdAsString()), true);
         }
 
         return 1;

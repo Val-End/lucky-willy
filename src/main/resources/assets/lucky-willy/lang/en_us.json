@@ -4,5 +4,8 @@
   "block.lucky-willy.willy_lucky_block": "Willy Lucky Block",
   "block.lucky-willy.lucky_block": "Lucky Block",
   "item.lucky-willy.trotuman_spawn_egg": "Trotuman Spawn Egg",
-  "entity.lucky-willy.trotuman": "Trotuman"
+  "entity.lucky-willy.trotuman": "Trotuman",
+  "commands.lucky-event.success": "Lucky Event executed: %s",
+  "commands.lucky-event.invalidPosition": "Invalid position for Lucky Event execution",
+  "lucky-event.not_executable": "Can't execute %s Lucky Event"
 }

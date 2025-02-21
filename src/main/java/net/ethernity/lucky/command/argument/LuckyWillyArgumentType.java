@@ -12,7 +12,7 @@ import net.minecraft.text.Text;
 
 public class LuckyWillyArgumentType {
     private static final DynamicCommandExceptionType NOT_EXECUTABLE_EXCEPTION = new DynamicCommandExceptionType(
-            id -> Text.stringifiedTranslatable("event.not_executable", id)
+            id -> Text.stringifiedTranslatable("lucky-event.not_executable", id)
     );
 
     public static RegistryEntry.Reference<LuckyEvent> getExecutableEvent(CommandContext<ServerCommandSource> context, String name) throws CommandSyntaxException {
