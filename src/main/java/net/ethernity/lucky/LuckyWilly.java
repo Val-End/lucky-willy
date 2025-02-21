@@ -1,11 +1,12 @@
 package net.ethernity.lucky;
 
-import net.ethernity.lucky.blocks.LuckyWilllyBlocks;
-import net.ethernity.lucky.blocks.events.LuckyEvents;
+import net.ethernity.lucky.block.LuckyWilllyBlocks;
+import net.ethernity.lucky.command.LuckyWillyComands;
+import net.ethernity.lucky.event.LuckyEvents;
 import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.ethernity.lucky.items.LuckyWillyItems;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
-import net.ethernity.lucky.world.gen.feature.LuckyWillyFeature;
+import net.ethernity.lucky.world.gen.LuckyWillyFeature;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -23,5 +24,6 @@ public class LuckyWilly implements ModInitializer {
 		LuckyWillyEntities.initialize();
 		LuckyWillyItems.initialize();
 		LuckyWillyFeature.initialize();
+		LuckyWillyComands.initialize();
 	}
 }

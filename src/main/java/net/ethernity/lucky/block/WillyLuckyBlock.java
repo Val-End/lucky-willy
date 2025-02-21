@@ -1,7 +1,7 @@
-package net.ethernity.lucky.blocks;
+package net.ethernity.lucky.block;
 
-import net.ethernity.lucky.blocks.events.LuckyEvent;
-import net.ethernity.lucky.blocks.events.LuckyEvents;
+import net.ethernity.lucky.event.LuckyEvent;
+import net.ethernity.lucky.event.LuckyEvents;
 
 import java.util.List;
 

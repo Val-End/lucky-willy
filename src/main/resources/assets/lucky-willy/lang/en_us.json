@@ -2,6 +2,7 @@
   "block.lucky-willy.weapon_lucky_block": "Weapon Lucky Block",
   "block.lucky-willy.armor_lucky_block": "Armor Lucky Block",
   "block.lucky-willy.willy_lucky_block": "Willy Lucky Block",
+  "block.lucky-willy.lucky_block": "Lucky Block",
   "item.lucky-willy.trotuman_spawn_egg": "Trotuman Spawn Egg",
   "entity.lucky-willy.trotuman": "Trotuman"
 }

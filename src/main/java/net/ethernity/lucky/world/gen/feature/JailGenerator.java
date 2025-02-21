@@ -15,12 +15,13 @@ public class JailGenerator {
         for (int yPos = -1; yPos <= 3; yPos++) {
             for (int xPos = -1; xPos <= 1; xPos++) {
                 for (int zPos = -1; zPos <= 1; zPos++) {
+                    BlockState block = air;
                     if(yPos == -1)
-                        structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), floor, Block.NOTIFY_LISTENERS);
+                        block = floor;
                     else if(!(xPos == 0 && zPos == 0))
-                        structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), ironBars, Block.NOTIFY_LISTENERS);
-                    else
-                        structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), air, Block.NOTIFY_LISTENERS);
+                        block = ironBars;
+
+                    structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), block, Block.NOTIFY_LISTENERS);
                 }
             }
         }

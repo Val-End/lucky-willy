@@ -1,14 +1,15 @@
-package net.ethernity.lucky.blocks.events;
+package net.ethernity.lucky.event.willy;
 
 import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.ethernity.lucky.entity.TrotumanEntity;
+import net.ethernity.lucky.event.LuckyEvent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
 public class TrotumanEvent extends LuckyEvent {
-    protected TrotumanEvent() {
-        super(0.0f);
+    public TrotumanEvent() {
+        super(0);
     }
 
     @Override

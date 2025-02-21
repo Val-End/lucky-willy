@@ -1,6 +1,6 @@
 package net.ethernity.lucky.registry;
 
-import net.ethernity.lucky.blocks.events.LuckyEvent;
+import net.ethernity.lucky.event.LuckyEvent;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.registry.*;
 

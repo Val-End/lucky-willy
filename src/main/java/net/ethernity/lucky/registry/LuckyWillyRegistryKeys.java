@@ -1,7 +1,7 @@
 package net.ethernity.lucky.registry;
 
 import net.ethernity.lucky.LuckyWilly;
-import net.ethernity.lucky.blocks.events.LuckyEvent;
+import net.ethernity.lucky.event.LuckyEvent;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;

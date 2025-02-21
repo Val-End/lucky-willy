@@ -1,7 +1,7 @@
 package net.ethernity.lucky.items;
 
 import net.ethernity.lucky.LuckyWilly;
-import net.ethernity.lucky.blocks.LuckyWilllyBlocks;
+import net.ethernity.lucky.block.LuckyWilllyBlocks;
 import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.EntityType;
@@ -29,7 +29,8 @@ public class LuckyWillyItems {
             itemGroup.add(LuckyWillyItems.TROTUMAN_SPAWN_EGG);
         });
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> {
+            itemGroup.add(LuckyWilllyBlocks.LUCKY_BLOCK.asItem());
             itemGroup.add(LuckyWilllyBlocks.WEAPON_LUCKY_BLOCK.asItem());
             itemGroup.add(LuckyWilllyBlocks.ARMOR_LUCKY_BLOCK.asItem());
             itemGroup.add(LuckyWilllyBlocks.WILLY_LUCKY_BLOCK.asItem());
