@@ -1,0 +1,41 @@
+package net.ethernity.lucky.event.vanilla;
+
+import net.ethernity.lucky.event.LuckyEvent;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+
+import java.util.List;
+
+public class RandomChestLootEvent extends LuckyEvent {
+    protected RandomChestLootEvent() {
+        super(-1);
+    }
+
+    @Override
+    public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
+        try {
+            world.setBlockState(pos, Blocks.CHEST.getDefaultState());
+            ChestBlockEntity chest = (ChestBlockEntity) world.getBlockEntity(pos);
+            if(chest == null)
+                return;
+
+            List<RegistryKey<LootTable>> lootTableList = LootTables.getAll()
+                    .stream()
+                    .filter(key -> key.getValue().getPath().startsWith("chests"))
+                    .toList();
+
+            if (lootTableList.isEmpty())
+                return;
+
+            chest.setLootTable(lootTableList.get(world.random.nextInt(lootTableList.size())));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

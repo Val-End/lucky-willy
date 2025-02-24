@@ -18,8 +18,6 @@ public class DiamondBlockEvent extends LuckyEvent {
     @Override
     public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
         FallingBlockEntity.spawnFromBlock(world, pos.add(0, 20, 0), Blocks.DIAMOND_BLOCK.getDefaultState());
-        LightningEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
-        lightning.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(pos));
-        world.spawnEntity(lightning);
+        this.spawnMob(EntityType.LIGHTNING_BOLT, world, pos);
     }
 }

@@ -11,13 +11,13 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-public class LuckyPyramidFeature extends Feature<DefaultFeatureConfig> {
+public class FourLuckyPyramidFeature extends Feature<DefaultFeatureConfig> {
     private final BlockState wall = Blocks.SANDSTONE.getDefaultState();
     private final BlockState lucky = LuckyWilllyBlocks.LUCKY_BLOCK.getDefaultState();
     private final BlockState gold = Blocks.GOLD_BLOCK.getDefaultState();
     private final BlockState air = Blocks.AIR.getDefaultState();
 
-    public LuckyPyramidFeature(Codec<DefaultFeatureConfig> codec) {
+    public FourLuckyPyramidFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);
     }
 

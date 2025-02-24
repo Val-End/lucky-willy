@@ -2,20 +2,20 @@ package net.ethernity.lucky.event.vanilla;
 
 import net.ethernity.lucky.event.LuckyEvent;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
-public class ChargedCreeperBlockEvent extends LuckyEvent {
-    public ChargedCreeperBlockEvent() {
-        super(-1);
+public class HorseArmorEvent extends LuckyEvent {
+    public HorseArmorEvent() {
+        super(0);
     }
 
     @Override
     public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
-        this.spawnMob(EntityType.CREEPER, world, pos);
-        this.spawnMob(EntityType.LIGHTNING_BOLT, world, pos);
+        this.dropStack(Items.DIAMOND_HORSE_ARMOR.getDefaultStack(), world, pos);
+        this.dropStack(Items.GOLDEN_HORSE_ARMOR.getDefaultStack(), world, pos);
+        this.dropStack(Items.IRON_HORSE_ARMOR.getDefaultStack(), world, pos);
     }
 }
