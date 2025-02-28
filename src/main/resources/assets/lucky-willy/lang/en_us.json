@@ -9,5 +9,6 @@
   "commands.lucky-event.invalidPosition": "Invalid position for Lucky Event execution",
   "lucky-event.not_executable": "Can't execute %s Lucky Event",
   "effect.lucky-willy.tiny": "Tiny",
-  "effect.lucky-willy.giant": "Giant"
+  "effect.lucky-willy.giant": "Giant",
+  "effect.lucky-willy.invert": "Invert"
 }

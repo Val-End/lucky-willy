@@ -37,6 +37,9 @@ public class WillyLuckyEvents {
     public static final LuckyEvent CREEPER_FALL_EVENT = register(
             "creeper_fall_event", new CreeperFallEvent()
     );
+    public static final LuckyEvent INVERT_EVENT = register(
+            "invert_event", new InvertEvent()
+    );
 
     private static LuckyEvent register(String id, LuckyEvent event) {
         return Registry.register(LuckyWillyRegistries.LUCKY_EVENT, Identifier.of(LuckyWilly.MOD_ID, ID + "/" + id), event);
