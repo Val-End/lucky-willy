@@ -3,12 +3,10 @@ package net.ethernity.lucky.client.renderer;
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.entity.TrotumanEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.BipedEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.feature.StuckArrowsFeatureRenderer;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.entity.feature.*;
+import net.minecraft.client.render.entity.model.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -17,12 +15,25 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 
-public class TrotumanRenderer extends LivingEntityRenderer<TrotumanEntity, PlayerEntityModel<TrotumanEntity>> {
+public class TrotumanRenderer extends BipedEntityRenderer<TrotumanEntity, PlayerEntityModel<TrotumanEntity>> {
     private static final Identifier TROTUMAN_TEXTURE = Identifier.of(LuckyWilly.MOD_ID, "textures/entity/trotuman.png");
 
     public TrotumanRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new PlayerEntityModel<>(ctx.getPart(EntityModelLayers.PLAYER), false), 0.5F);
+        this.addFeature(
+                new ArmorFeatureRenderer<>(
+                        this,
+                        new ArmorEntityModel(ctx.getPart(EntityModelLayers.PLAYER_INNER_ARMOR)),
+                        new ArmorEntityModel(ctx.getPart(EntityModelLayers.PLAYER_OUTER_ARMOR)),
+                        ctx.getModelManager()
+                )
+        );
         this.addFeature(new StuckArrowsFeatureRenderer<>(ctx, this));
+    }
+
+    @Override
+    protected boolean hasLabel(TrotumanEntity mobEntity) {
+        return true;
     }
 
     public void render(TrotumanEntity entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

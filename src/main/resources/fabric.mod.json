@@ -20,9 +20,6 @@
 		],
 		"client": [
           "net.ethernity.lucky.client.LuckyWillyClient"
-		],
-		"fabric-datagen": [
-          "net.ethernity.lucky.data.LuckyWillyDataGenerator"
 		]
 	},
 	"mixins": [

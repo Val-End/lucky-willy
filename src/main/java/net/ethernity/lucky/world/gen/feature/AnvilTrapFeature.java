@@ -22,7 +22,13 @@ public class AnvilTrapFeature extends Feature<DefaultFeatureConfig> {
         StructureWorldAccess structureWorldAccess = context.getWorld();
         BlockPos blockPos = context.getOrigin();
         JailGenerator.generate(structureWorldAccess, blockPos);
-        structureWorldAccess.setBlockState(blockPos.add(0, 30, 0), this.anvil, Block.NOTIFY_LISTENERS);
+
+        int anvilY = 30;
+        while(structureWorldAccess.isOutOfHeightLimit(blockPos.getY() + anvilY)){
+            anvilY--;
+        }
+
+        structureWorldAccess.setBlockState(blockPos.add(0, anvilY, 0), this.anvil, Block.NOTIFY_LISTENERS);
         return true;
     }
 }

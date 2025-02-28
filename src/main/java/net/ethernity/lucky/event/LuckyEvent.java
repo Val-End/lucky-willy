@@ -1,5 +1,6 @@
 package net.ethernity.lucky.event;
 
+import net.ethernity.lucky.LuckyWilly;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -31,8 +32,10 @@ abstract public class LuckyEvent {
     public abstract void execute(BlockPos pos, ServerWorld world, PlayerEntity player);
 
     public static ItemStack getModStack(Identifier id) {
-        if (!FabricLoader.getInstance().isModLoaded(id.getNamespace()))
+        if (!FabricLoader.getInstance().isModLoaded(id.getNamespace())){
+            LuckyWilly.LOGGER.info("{} is not loaded yet", id);
             return ItemStack.EMPTY;
+        }
 
         return Registries.ITEM.get(id).getDefaultStack();
     }
@@ -56,6 +59,7 @@ abstract public class LuckyEvent {
     }
 
     protected void dropStack(ItemStack stack, ServerWorld world, BlockPos pos) {
+        LuckyWilly.LOGGER.info(stack.toString());
         Block.dropStack(world, pos, stack);
     }
 

@@ -1,8 +1,11 @@
 package net.ethernity.lucky.block;
 
+import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.event.LuckyEvent;
+import net.ethernity.lucky.event.LuckyEventPreset;
 import net.ethernity.lucky.event.LuckyEvents;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
+import net.ethernity.lucky.world.gen.LuckyWillyFeature;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class LuckyBlock extends Block {
+    private static LuckyEvent lastEvent = LuckyEventPreset.empty();
     private final String luckyID;
 
     public LuckyBlock(String id) {
@@ -60,7 +64,7 @@ public class LuckyBlock extends Block {
         world.breakBlock(pos, true);
 
         Vec3d pos3d = pos.toCenterPos();
-        PlayerEntity player = world.getClosestPlayer(pos3d.getX(), pos3d.getY(), pos3d.getZ(), 32, true);
+        PlayerEntity player = world.getClosestPlayer(pos3d.getX(), pos3d.getY(), pos3d.getZ(), 32, false);
         if(player != null)
             this.afterBreak(world, player, pos, state, null, ItemStack.EMPTY);
     }
@@ -70,8 +74,15 @@ public class LuckyBlock extends Block {
         if(events.isEmpty())
             return;
 
-        LuckyEvent event = events.get(world.random.nextInt(events.size()));
+        LuckyEvent event = lastEvent;
+        while(event.equals(lastEvent)){
+            event = events.get(world.random.nextInt(events.size()));
+        }
+
+        LuckyWilly.LOGGER.info("Firing: {}", LuckyWillyRegistries.LUCKY_EVENT.getId(event));
+
         event.execute(pos, world, player);
+        lastEvent = event;
     }
 
     public List<LuckyEvent> getEvents() {

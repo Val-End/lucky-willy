@@ -10,14 +10,6 @@ import net.minecraft.util.Identifier;
 public class WeaponLuckyEvents {
     public static final String ID = "weapon";
 
-    public static final LuckyEvent SHOTGUN_EVENT = register(
-            "shotgun_event", LuckyEventPreset.dropStack(1, Identifier.of("pointblank", "m870"))
-    );
-
-    public static final LuckyEvent SMASH_COD_EVENT = register(
-            "smash_cod_event", new SmashCodEvent()
-    );
-
     private static LuckyEvent register(String id, LuckyEvent event) {
         return Registry.register(LuckyWillyRegistries.LUCKY_EVENT, Identifier.of(LuckyWilly.MOD_ID, ID + "/" + id), event);
     }

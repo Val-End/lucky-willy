@@ -11,6 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.Feature;
 
 public abstract class LuckyEventPreset {
+
+    public static LuckyEvent empty() {
+        return new LuckyEvent(0) {
+            public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {}
+        };
+    }
     /*
      * Use this if you want to access another mod item.
      */

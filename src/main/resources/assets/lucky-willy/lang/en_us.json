@@ -7,5 +7,7 @@
   "entity.lucky-willy.trotuman": "Trotuman",
   "commands.lucky-event.success": "Lucky Event executed: %s",
   "commands.lucky-event.invalidPosition": "Invalid position for Lucky Event execution",
-  "lucky-event.not_executable": "Can't execute %s Lucky Event"
+  "lucky-event.not_executable": "Can't execute %s Lucky Event",
+  "effect.lucky-willy.tiny": "Tiny",
+  "effect.lucky-willy.giant": "Giant"
 }
