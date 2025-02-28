@@ -1,5 +1,6 @@
 package net.ethernity.lucky.client;
 
+import net.ethernity.lucky.client.renderer.ScreenRenderer;
 import net.ethernity.lucky.client.renderer.TrotumanRenderer;
 import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,5 +10,6 @@ public class LuckyWillyClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		EntityRendererRegistry.register(LuckyWillyEntities.TROTUMAN, TrotumanRenderer::new);
+		ScreenRenderer.init();
 	}
 }

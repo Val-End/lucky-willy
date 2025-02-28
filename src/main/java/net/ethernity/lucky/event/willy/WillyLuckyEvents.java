@@ -41,6 +41,10 @@ public class WillyLuckyEvents {
             "invert_event", new InvertEvent()
     );
 
+    public static final LuckyEvent SCREAMER = register(
+            "screamer_event", new ScreamerEvent()
+    );
+
     private static LuckyEvent register(String id, LuckyEvent event) {
         return Registry.register(LuckyWillyRegistries.LUCKY_EVENT, Identifier.of(LuckyWilly.MOD_ID, ID + "/" + id), event);
     }
