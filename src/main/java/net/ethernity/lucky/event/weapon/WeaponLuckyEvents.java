@@ -2,7 +2,6 @@ package net.ethernity.lucky.event.weapon;
 
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.event.LuckyEvent;
-import net.ethernity.lucky.event.LuckyEventPreset;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

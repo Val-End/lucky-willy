@@ -14,28 +14,24 @@ import java.util.List;
 
 public class RandomChestLootEvent extends LuckyEvent {
     protected RandomChestLootEvent() {
-        super(-1);
+        super(0);
     }
 
     @Override
     public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
-        try {
-            world.setBlockState(pos, Blocks.CHEST.getDefaultState());
-            ChestBlockEntity chest = (ChestBlockEntity) world.getBlockEntity(pos);
-            if(chest == null)
-                return;
+        world.setBlockState(pos, Blocks.CHEST.getDefaultState());
+        ChestBlockEntity chest = (ChestBlockEntity) world.getBlockEntity(pos);
+        if(chest == null)
+            return;
 
-            List<RegistryKey<LootTable>> lootTableList = LootTables.getAll()
-                    .stream()
-                    .filter(key -> key.getValue().getPath().startsWith("chests"))
-                    .toList();
+        List<RegistryKey<LootTable>> lootTableList = LootTables.getAll()
+                .stream()
+                .filter(key -> key.getValue().getPath().startsWith("chests"))
+                .toList();
 
-            if (lootTableList.isEmpty())
-                return;
+        if (lootTableList.isEmpty())
+            return;
 
-            chest.setLootTable(lootTableList.get(world.random.nextInt(lootTableList.size())));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        chest.setLootTable(lootTableList.get(world.random.nextInt(lootTableList.size())));
     }
 }
