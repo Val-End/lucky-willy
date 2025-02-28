@@ -2,10 +2,9 @@ package net.ethernity.lucky.block;
 
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.event.LuckyEvent;
-import net.ethernity.lucky.event.LuckyEventPreset;
+import net.ethernity.lucky.event.LuckyEventBuilder;
 import net.ethernity.lucky.event.LuckyEvents;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
-import net.ethernity.lucky.world.gen.LuckyWillyFeature;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class LuckyBlock extends Block {
-    private static LuckyEvent lastEvent = LuckyEventPreset.empty();
+    private static LuckyEvent lastEvent = LuckyEventBuilder.empty();
     private final String luckyID;
 
     public LuckyBlock(String id) {

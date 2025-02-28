@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 public class LuckyWillyEffects {
     public static final RegistryEntry<StatusEffect> TINY = register("tiny", new ScaleStatusEffect(0x83a6ff, -0.1f, "effect.tiny"));
     public static final RegistryEntry<StatusEffect> GIANT = register("giant", new ScaleStatusEffect(0xff463f, 0.5f, "effect.giant"));
+    public static final RegistryEntry<StatusEffect> INVERT = register("invert", new InvertStatusEffect(0x2f2f30));
     public static final RegistryEntry<StatusEffect> INVERT = register("invert", new InvertStatusEffect(0xff463));
     public static final RegistryEntry<StatusEffect> SCREAMER = register("screamer", new ScreamerStatusEffect(0xff463));
 
