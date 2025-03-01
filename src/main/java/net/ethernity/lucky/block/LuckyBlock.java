@@ -2,7 +2,6 @@ package net.ethernity.lucky.block;
 
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.event.LuckyEvent;
-import net.ethernity.lucky.event.LuckyEventBuilder;
 import net.ethernity.lucky.event.LuckyEvents;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
 import net.minecraft.block.AbstractBlock;
@@ -10,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
@@ -21,10 +21,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LuckyBlock extends Block {
-    private static LuckyEvent lastEvent = LuckyEventBuilder.empty();
+    private static final Set<LuckyEvent> executedEvents = new HashSet<>();
     private final String luckyID;
 
     public LuckyBlock(String id) {
@@ -73,15 +75,51 @@ public class LuckyBlock extends Block {
         if(events.isEmpty())
             return;
 
-        LuckyEvent event = lastEvent;
-        while(event.equals(lastEvent)){
-            event = events.get(world.random.nextInt(events.size()));
+        List<LuckyEvent> availableEvents = events
+                .stream()
+                .filter(event -> !executedEvents.contains(event))
+                .toList();
+
+        if (availableEvents.isEmpty()) {
+            executedEvents.clear();
+            availableEvents = List.copyOf(events);
         }
 
-        LuckyWilly.LOGGER.info("Firing: {}", LuckyWillyRegistries.LUCKY_EVENT.getId(event));
+        double playerLuck = player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).getBaseValue();
+        LuckyWilly.LOGGER.info("{} lucky: {}", player.getName().getLiteralString(), playerLuck);
 
+        List<LuckyEvent> filteredEvents = availableEvents.stream().filter(event -> {
+            if (playerLuck > 0 && event.getLucky() > 0) { // In case of good luck
+                double removalChance = Math.min(1.0, playerLuck);
+                boolean removeGoodluck = world.random.nextDouble() > removalChance;
+                if(!removeGoodluck)
+                    LuckyWilly.LOGGER.info("Removing GoodLuck Event");
+
+                return removeGoodluck;
+            }
+            if (playerLuck < 0 && event.getLucky() < 0) { // In case of bad luck
+                double removalChance = Math.min(1.0, Math.abs(playerLuck));
+                boolean removeBadluck = world.random.nextDouble() > removalChance;
+                if(!removeBadluck)
+                    LuckyWilly.LOGGER.info("Removing BadLuck Event");
+
+                return removeBadluck;
+            }
+
+            return true;
+        }).toList();
+
+        List<LuckyEvent> finalEvents = filteredEvents.isEmpty() ? availableEvents : filteredEvents;
+        LuckyEvent event = finalEvents.get(world.random.nextInt(finalEvents.size()));
+
+        double luck = 0.1d;
+        if(event.getLucky() > 0)
+            luck *= -1;
+
+        player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).setBaseValue(playerLuck + luck);
+        LuckyWilly.LOGGER.info("Firing: {}", LuckyWillyRegistries.LUCKY_EVENT.getId(event));
         event.execute(pos, world, player);
-        lastEvent = event;
+        executedEvents.add(event);
     }
 
     public List<LuckyEvent> getEvents() {

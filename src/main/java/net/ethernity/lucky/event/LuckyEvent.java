@@ -25,7 +25,6 @@ import java.util.Optional;
 /**
  * Base class for lucky events that can be triggered in the game.
  * Events carry a luck value and provide functionality for interacting with the game world.
- *
  * SPONSOR CHATGPT (Le pedi que documente el codigo)
  */
 public abstract class LuckyEvent {
@@ -75,6 +74,7 @@ public abstract class LuckyEvent {
      * @param player The player to receive the item
      */
     protected void giveStack(Identifier id, PlayerEntity player) {
+        LuckyWilly.LOGGER.info("External item: {}", id);
         this.giveStack(ItemUtil.modStack(id), player);
     }
 
@@ -95,6 +95,7 @@ public abstract class LuckyEvent {
      * @param player The player to receive the item
      */
     protected void giveStack(ItemStack stack, PlayerEntity player) {
+        LuckyWilly.LOGGER.info("Giving item: {}", stack.toString());
         player.giveItemStack(stack);
     }
 
@@ -106,6 +107,7 @@ public abstract class LuckyEvent {
      * @param pos The position to drop the item at
      */
     protected void dropStack(Identifier id, ServerWorld world, BlockPos pos) {
+        LuckyWilly.LOGGER.info("External item: {}", id);
         this.dropStack(ItemUtil.modStack(id), world, pos);
     }
 
@@ -176,6 +178,7 @@ public abstract class LuckyEvent {
     protected <T extends Entity> void spawnMob(T entity, ServerWorld world, BlockPos pos) {
         entity.refreshPositionAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
         world.spawnEntity(entity);
+        LuckyWilly.LOGGER.warn("Mob Spawned: {}", entity.getType().toString());
     }
 
     /**
@@ -206,6 +209,7 @@ public abstract class LuckyEvent {
             return;
         }
 
+        LuckyWilly.LOGGER.warn("Placing Feature: {}", key.toString());
         feature.get().generate(new FeatureContext<>(
             Optional.empty(),
             world,
@@ -247,5 +251,6 @@ public abstract class LuckyEvent {
      */
     protected void applyEffect(PlayerEntity player, RegistryEntry effect, int duration, int amplifier) {
         player.addStatusEffect(new StatusEffectInstance(effect, duration, amplifier));
+        LuckyWilly.LOGGER.warn("Effect Applied: {}", effect.getIdAsString());
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import java.util.List;
 
 public class RandomChestLootEvent extends LuckyEvent {
-    protected RandomChestLootEvent() {
+    public RandomChestLootEvent() {
         super(0);
     }
 

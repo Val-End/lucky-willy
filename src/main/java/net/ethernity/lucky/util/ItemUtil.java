@@ -25,10 +25,11 @@ public class ItemUtil {
      */
     public static ItemStack modStack(Identifier id) {
         if (!FabricLoader.getInstance().isModLoaded(id.getNamespace())) {
-            LuckyWilly.LOGGER.info("{} is not loaded yet", id);
+            LuckyWilly.LOGGER.error("{} is not loaded yet", id);
             return ItemStack.EMPTY;
         }
 
+        LuckyWilly.LOGGER.info(Registries.ITEM.get(id).toString());
         return Registries.ITEM.get(id).getDefaultStack();
     }
 }

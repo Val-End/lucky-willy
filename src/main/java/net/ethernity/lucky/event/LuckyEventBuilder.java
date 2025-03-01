@@ -48,7 +48,7 @@ public class LuckyEventBuilder {
     }
 
     public LuckyEventBuilder giveStack(Identifier id) {
-        return this.giveStack(ItemUtil.modStack(id));
+        return this.withAction(ctx -> ctx.player().giveItemStack(ItemUtil.modStack(id)));
     }
 
     public LuckyEventBuilder giveStack(Item item) {
@@ -60,7 +60,11 @@ public class LuckyEventBuilder {
     }
 
     public LuckyEventBuilder dropStack(Identifier id) {
-        return this.dropStack(ItemUtil.modStack(id));
+        return this.withAction(ctx -> Block.dropStack(ctx.world(), ctx.pos(), ItemUtil.modStack(id)));
+    }
+
+    public LuckyEventBuilder dropStack(Identifier id, int count) {
+        return this.withAction(ctx -> Block.dropStack(ctx.world(), ctx.pos(), ItemUtil.modStack(id).copyWithCount(count)));
     }
 
     public LuckyEventBuilder dropStack(Item item) {
@@ -72,12 +76,20 @@ public class LuckyEventBuilder {
     }
 
     public LuckyEventBuilder spawnMob(Identifier id) {
-        if (!FabricLoader.getInstance().isModLoaded(id.getNamespace())) {
-            LuckyWilly.LOGGER.warn("Mod {} is not loaded, cannot spawn entity", id.getNamespace());
-            return this;
-        }
+        return this.withAction(ctx -> {
+            if (!FabricLoader.getInstance().isModLoaded(id.getNamespace())) {
+                LuckyWilly.LOGGER.warn("Mod {} is not loaded, cannot spawn entity", id.getNamespace());
+                return;
+            }
 
-        return this.spawnMob(Registries.ENTITY_TYPE.get(id));
+            Entity entity = Registries.ENTITY_TYPE.get(id).create(ctx.world());
+            if (entity == null)
+                return;
+
+            BlockPos pos = ctx.pos();
+            entity.refreshPositionAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+            ctx.world().spawnEntity(entity);
+        });
     }
 
     public <T extends Entity> LuckyEventBuilder spawnMob(EntityType<T> type) {
