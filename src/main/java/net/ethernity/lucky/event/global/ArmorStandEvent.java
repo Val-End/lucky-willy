@@ -79,7 +79,7 @@ public class ArmorStandEvent extends LuckyEvent {
                 TntEntity tnt = new TntEntity(EntityType.TNT, world);
                 tnt.setPosition(pos.getX() + x, pos.getY(), pos.getZ() + z);
                 double d = world.random.nextDouble() * (double)((float)Math.PI * 2F);
-                tnt.setVelocity(0.8 * x, 0.8F, 0.8 * z);
+                tnt.setVelocity(0.2f * x, 0.6F, 0.2f * z);
                 tnt.setFuse(80);
                 world.spawnEntity(tnt);
             }
