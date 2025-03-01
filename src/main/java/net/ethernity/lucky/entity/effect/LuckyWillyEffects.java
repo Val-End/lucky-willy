@@ -12,6 +12,7 @@ public class LuckyWillyEffects {
     public static final RegistryEntry<StatusEffect> GIANT = register("giant", new ScaleStatusEffect(0xff463f, 0.5f, "effect.giant"));
     public static final RegistryEntry<StatusEffect> INVERT = register("invert", new InvertStatusEffect(0x2f2f30));
     public static final RegistryEntry<StatusEffect> SCREAMER = register("screamer", new ScreamerStatusEffect(0xff463));
+    public static final RegistryEntry<StatusEffect> FREEZE = register("freeze", new FreezeStatusEffect(0xff463, "effect.freeze"));
 
     private static RegistryEntry<StatusEffect> register(String id, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(LuckyWilly.MOD_ID, id), statusEffect);

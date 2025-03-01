@@ -87,10 +87,7 @@ public class WeaponLuckyEvents {
                     .dropStack(Items.BOW)
                     .dropStack(Items.ARROW.getDefaultStack().copyWithCount(16))
     );
-    public static final LuckyEvent STICK_EVENT = register(
-            "stick_event", LuckyEventBuilder.create(-5)
-                    .dropStack(Items.STICK)
-    );
+
     public static final LuckyEvent LASER_BLADE_EVENT = register(
             "laser_blade_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("tolaserblade", "laser_blade"))

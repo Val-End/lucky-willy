@@ -3,5 +3,15 @@
     "sounds": [
       "lucky-willy:screamer"
     ]
+  },
+  "painting_jumpscare": {
+    "sounds": [
+      "lucky-willy:painting_jumpscare"
+    ]
+  },
+  "painting_voice": {
+    "sounds": [
+      "lucky-willy:painting_voice"
+    ]
   }
 }
