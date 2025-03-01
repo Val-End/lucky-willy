@@ -17,6 +17,13 @@ public class LuckyWillyEntities {
                     .trackingTickInterval(2)
     );
 
+    public static final EntityType<PaintingEntity> PAINTING = register(
+            "painting", EntityType.Builder.create(PaintingEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(1.5F, 0.5F)
+    );
+
+
+
     private static EntityType register(String id, EntityType.Builder builder) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(LuckyWilly.MOD_ID, id), builder.build(id));
     }

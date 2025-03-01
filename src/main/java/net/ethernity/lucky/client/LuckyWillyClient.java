@@ -1,5 +1,6 @@
 package net.ethernity.lucky.client;
 
+import net.ethernity.lucky.client.renderer.PaintingRenderer;
 import net.ethernity.lucky.client.renderer.ScreenRenderer;
 import net.ethernity.lucky.client.renderer.TrotumanRenderer;
 import net.ethernity.lucky.entity.LuckyWillyEntities;
@@ -10,6 +11,7 @@ public class LuckyWillyClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		EntityRendererRegistry.register(LuckyWillyEntities.TROTUMAN, TrotumanRenderer::new);
+		EntityRendererRegistry.register(LuckyWillyEntities.PAINTING, PaintingRenderer::new);
 		ScreenRenderer.init();
 	}
 }
