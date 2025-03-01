@@ -4,6 +4,7 @@ import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.entity.effect.LuckyWillyEffects;
 import net.ethernity.lucky.event.armor.ArmorLuckyEvents;
 import net.ethernity.lucky.event.global.ExplosionEvent;
+import net.ethernity.lucky.event.global.PaintingEvent;
 import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
 import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
 import net.ethernity.lucky.event.global.ArmorStandEvent;
@@ -81,6 +82,8 @@ public class LuckyEvents {
     public static final LuckyEvent BAD_ARMOR_STAND_EVENT = register(
             "bad_armor_stand_event", new ArmorStandEvent(-1)
     );
+
+    public static final LuckyEvent PAINTING_EVENT = register("painting_event", PaintingEvent::new);
 
     public static Identifier getId(LuckyEvent type) {
         return LuckyWillyRegistries.LUCKY_EVENT.getId(type);
