@@ -16,21 +16,9 @@ import java.util.function.Supplier;
 public class WillyLuckyEvents {
     public static final String ID = "willy";
 
-    public static final LuckyEvent TINY_SCALE_EVENT = register(
-            "tiny_scale_event", LuckyEventBuilder.create(0)
-                    .applyEffect(LuckyWillyEffects.TINY, 600, 8)
-    );
-    public static final LuckyEvent GIANT_SCALE_EVENT = register(
-            "giant_scale_event", LuckyEventBuilder.create(0)
-                    .applyEffect(LuckyWillyEffects.GIANT, 600, 8)
-    );
     public static final LuckyEvent STAFF_SOUND_EVENT = register(
             "staff_sound_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("gobber2", "gobber2_staff_sound"))
-    );
-    public static final LuckyEvent INVERT_EVENT = register(
-            "invert_event", LuckyEventBuilder.create(-1)
-                    .applyEffect(LuckyWillyEffects.INVERT, 600)
     );
     public static final LuckyEvent NETHERITE_HOE_EVENT = register(
             "netherite_hoe_event", LuckyEventBuilder.create(-1)
@@ -130,7 +118,6 @@ public class WillyLuckyEvents {
     public static final LuckyEvent SPIDER_EVENT = register("spider_event", new MobWithHeadEvent<>(EntityType.SPIDER));
     public static final LuckyEvent HALF_HEART_EVENT = register("half_heart_event", HalfHeartEvent::new);
     public static final LuckyEvent TROTUMAN_EVENT = register("trotuman_event", TrotumanEvent::new);
-    public static final LuckyEvent CREEPER_FALL_EVENT = register("creeper_fall_event", CreeperFallEvent::new);
     public static final LuckyEvent EQUIP_PUMPKIN_EVENT = register("equip_pumpkin_event", new EquipCurseEvent(Items.CARVED_PUMPKIN));
     public static final LuckyEvent EQUIP_CURSED_CHESTPLATE_EVENT = register("equip_cursed_chestplate_event", new EquipCurseEvent(Items.GOLDEN_CHESTPLATE));
     public static final LuckyEvent EQUIP_CURSED_LEGGINGS_EVENT = register("equip_cursed_leggings_event", new EquipCurseEvent(Items.GOLDEN_LEGGINGS));

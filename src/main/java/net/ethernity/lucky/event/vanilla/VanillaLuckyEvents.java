@@ -40,11 +40,6 @@ public final class VanillaLuckyEvents {
             "beacon_event", LuckyEventBuilder.create(0)
                     .dropStack(Blocks.BEACON.asItem())
     );
-    public static final LuckyEvent CHARGED_CREEPER_EVENT = register(
-            "charged_creeper_event", LuckyEventBuilder.create(-1)
-                    .spawnMob(EntityType.CREEPER)
-                    .spawnMob(EntityType.LIGHTNING_BOLT)
-    );
     public static final LuckyEvent GOLDEN_APPLES_EVENT = register(
             "golden_apples_event", LuckyEventBuilder.create(1)
                     .dropStack(Items.ENCHANTED_GOLDEN_APPLE)
@@ -67,9 +62,7 @@ public final class VanillaLuckyEvents {
 
     public static final LuckyEvent BOB_EVENT = register("bob_event", BobEvent::new);
     public static final LuckyEvent DIAMOND_BLOCK_EVENT = register("diamond_block_event", DiamondBlockEvent::new);
-    public static final LuckyEvent EXPLOSION_EVENT = register("explosion_event", ExplosionEvent::new);
     public static final LuckyEvent LAPIZ_BLOCK_EVENT = register("lapiz_block_event", LapizBlockEvent::new);
-    public static final LuckyEvent RANDOM_CHEST_LOOT_EVENT = register("random_chest_loot_event", RandomChestLootEvent::new);
 
     private static LuckyEvent register(String id, LuckyEvent event) {
         return Registry.register(LuckyWillyRegistries.LUCKY_EVENT, Identifier.of(LuckyWilly.MOD_ID, ID + "/" + id), event);

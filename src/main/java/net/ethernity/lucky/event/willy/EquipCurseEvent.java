@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 public class EquipCurseEvent extends LuckyEvent {
     private final Item item;
 
-    protected EquipCurseEvent(Item item) {
+    public EquipCurseEvent(Item item) {
         super(-1);
         this.item = item;
     }

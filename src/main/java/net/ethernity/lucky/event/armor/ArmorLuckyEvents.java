@@ -3,9 +3,8 @@ package net.ethernity.lucky.event.armor;
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.event.LuckyEvent;
 import net.ethernity.lucky.event.LuckyEventBuilder;
-import net.ethernity.lucky.event.vanilla.RandomChestLootEvent;
+import net.ethernity.lucky.event.willy.EquipCurseEvent;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -15,13 +14,10 @@ import java.util.function.Supplier;
 public class ArmorLuckyEvents {
     public static final String ID = "armor";
 
-    public static final LuckyEvent RANDOM_CHEST_LOOT_EVENT = register("random_chest_loot_event", RandomChestLootEvent::new);
-    public static final LuckyEvent CHARGED_CREEPER_EVENT = register(
-            "charged_creeper_event", LuckyEventBuilder.create(-1)
-                    .spawnMob(EntityType.CREEPER)
-                    .spawnMob(EntityType.LIGHTNING_BOLT)
-    );
-
+    public static final LuckyEvent EQUIP_PUMPKIN_EVENT = register("equip_pumpkin_event", new EquipCurseEvent(Items.CARVED_PUMPKIN));
+    public static final LuckyEvent EQUIP_CURSED_CHESTPLATE_EVENT = register("equip_cursed_chestplate_event", new EquipCurseEvent(Items.GOLDEN_CHESTPLATE));
+    public static final LuckyEvent EQUIP_CURSED_LEGGINGS_EVENT = register("equip_cursed_leggings_event", new EquipCurseEvent(Items.GOLDEN_LEGGINGS));
+    public static final LuckyEvent EQUIP_CURSED_BOOTS_EVENT = register("equip_cursed_boots_event", new EquipCurseEvent(Items.GOLDEN_BOOTS));
     public static final LuckyEvent DIAMOND_HORSE_ARMOR_EVENT = register(
             "diamond_horse_armor_event", LuckyEventBuilder.create(-1)
                     .dropStack(Items.DIAMOND_HORSE_ARMOR)

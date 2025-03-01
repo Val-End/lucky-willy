@@ -17,6 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -80,52 +81,55 @@ public class LuckyBlock extends Block {
                 .filter(event -> !executedEvents.contains(event))
                 .toList();
 
-        if (availableEvents.isEmpty()) {
-            executedEvents.clear();
-            availableEvents = List.copyOf(events);
-        }
+        if (availableEvents.isEmpty())
+            this.cleanEvents(availableEvents, events);
 
         double playerLuck = player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).getBaseValue();
         LuckyWilly.LOGGER.info("{} lucky: {}", player.getName().getLiteralString(), playerLuck);
 
-        List<LuckyEvent> filteredEvents = availableEvents.stream().filter(event -> {
-            if (playerLuck > 0 && event.getLucky() > 0) { // In case of good luck
-                double removalChance = Math.min(1.0, playerLuck);
-                boolean removeGoodluck = world.random.nextDouble() > removalChance;
-                if(!removeGoodluck)
-                    LuckyWilly.LOGGER.info("Removing GoodLuck Event");
-
-                return removeGoodluck;
-            }
-            if (playerLuck < 0 && event.getLucky() < 0) { // In case of bad luck
-                double removalChance = Math.min(1.0, Math.abs(playerLuck));
-                boolean removeBadluck = world.random.nextDouble() > removalChance;
-                if(!removeBadluck)
-                    LuckyWilly.LOGGER.info("Removing BadLuck Event");
-
-                return removeBadluck;
-            }
-
-            return true;
-        }).toList();
+        List<LuckyEvent> filteredEvents = availableEvents.stream().filter(event -> luckySystem(event, playerLuck, world)).toList();
+        if(filteredEvents.isEmpty()){
+            this.cleanEvents(availableEvents, events);
+            filteredEvents = availableEvents.stream().filter(event -> luckySystem(event, playerLuck, world)).toList();
+        }
 
         List<LuckyEvent> finalEvents = filteredEvents.isEmpty() ? availableEvents : filteredEvents;
         LuckyEvent event = finalEvents.get(world.random.nextInt(finalEvents.size()));
 
-        double luck = 0.1d;
-        if(event.getLucky() > 0)
-            luck *= -1;
+        double luck = 0.1d * event.getLucky();
+        player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).setBaseValue(Math.clamp(playerLuck + luck, -1, 1));
 
-        player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).setBaseValue(playerLuck + luck);
-        LuckyWilly.LOGGER.info("Firing: {}", LuckyWillyRegistries.LUCKY_EVENT.getId(event));
+        LuckyWilly.LOGGER.info("New Player Lucky: {}", playerLuck + luck);
+        LuckyWilly.LOGGER.info("Firing ({}): {}", event.getLucky(), LuckyWillyRegistries.LUCKY_EVENT.getId(event));
+
         event.execute(pos, world, player);
         executedEvents.add(event);
     }
 
+    private boolean luckySystem(LuckyEvent event, double playerLuck, ServerWorld world) {
+        if ((playerLuck > 0 && event.getLucky() > 0) || (playerLuck < 0 && event.getLucky() < 0)) {
+            double removalChance = Math.min(1.0, Math.abs(playerLuck));
+            boolean remove = world.random.nextDouble() <= removalChance;
+
+            if(remove)
+                LuckyWilly.LOGGER.info("Removing {} Luck Event", event.getLucky());
+
+            return !remove;
+        }
+
+        return true;
+    }
+
+    private void cleanEvents(List<LuckyEvent> availableEvents, List<LuckyEvent> events) {
+        executedEvents.clear();
+        availableEvents = List.copyOf(events);
+    }
+
     public List<LuckyEvent> getEvents() {
-        return LuckyWillyRegistries.LUCKY_EVENT.stream().filter(key ->
-                LuckyEvents.getId(key).getPath().startsWith(this.luckyID)
-        ).toList();
+        return LuckyWillyRegistries.LUCKY_EVENT.stream().filter(key -> {
+            String path = LuckyEvents.getId(key).getPath();
+            return path.startsWith(this.luckyID) || path.startsWith(LuckyEvents.ID);
+        }).toList();
     }
 
     @Override
