@@ -3,7 +3,6 @@
   "package": "net.ethernity.lucky.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "CameraMixin",
     "LivingRendererMixin",
     "SpiderModelMixin"
   ],
