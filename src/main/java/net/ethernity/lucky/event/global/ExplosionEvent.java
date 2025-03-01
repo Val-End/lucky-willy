@@ -1,4 +1,4 @@
-package net.ethernity.lucky.event.vanilla;
+package net.ethernity.lucky.event.global;
 
 import net.ethernity.lucky.event.LuckyEvent;
 import net.minecraft.entity.player.PlayerEntity;

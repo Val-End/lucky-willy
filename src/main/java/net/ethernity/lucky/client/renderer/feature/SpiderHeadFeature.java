@@ -49,7 +49,7 @@ public class SpiderHeadFeature<T extends LivingEntity, M extends EntityModel<T> 
                 ProfileComponent profileComponent = itemStack.get(DataComponentTypes.PROFILE);
                 matrixStack.translate(-0.5, 0.0, -0.5);
                 SkullBlock.SkullType skullType = ((AbstractSkullBlock)((BlockItem)item).getBlock()).getSkullType();
-                SkullBlockEntityModel skullBlockEntityModel = (SkullBlockEntityModel)this.headModels.get(skullType);
+                SkullBlockEntityModel skullBlockEntityModel = this.headModels.get(skullType);
                 RenderLayer renderLayer = SkullBlockEntityRenderer.getRenderLayer(skullType, profileComponent);
                 LimbAnimator limbAnimator;
                 if (livingEntity.getVehicle() instanceof LivingEntity livingEntity2) {

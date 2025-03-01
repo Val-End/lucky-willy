@@ -60,6 +60,5 @@ public class ScreenRenderer {
         MinecraftClient client = MinecraftClient.getInstance();
         SoundEvent sound = SoundEvent.of(Identifier.of(LuckyWilly.MOD_ID, "screamer"));
         client.getSoundManager().play(PositionedSoundInstance.master(sound, 1.0F));
-        MinecraftClient.getInstance().player.sendMessage(Text.literal("play"));
     }
 }

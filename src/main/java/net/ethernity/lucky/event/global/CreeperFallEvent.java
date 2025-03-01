@@ -1,4 +1,4 @@
-package net.ethernity.lucky.event.willy;
+package net.ethernity.lucky.event.global;
 
 import net.ethernity.lucky.event.LuckyEvent;
 import net.ethernity.lucky.world.gen.LuckyWillyFeature;

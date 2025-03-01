@@ -3,11 +3,11 @@ package net.ethernity.lucky.event;
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.entity.effect.LuckyWillyEffects;
 import net.ethernity.lucky.event.armor.ArmorLuckyEvents;
-import net.ethernity.lucky.event.vanilla.ExplosionEvent;
-import net.ethernity.lucky.event.vanilla.RandomChestLootEvent;
+import net.ethernity.lucky.event.global.ExplosionEvent;
 import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
 import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
-import net.ethernity.lucky.event.willy.CreeperFallEvent;
+import net.ethernity.lucky.event.global.ArmorStandEvent;
+import net.ethernity.lucky.event.global.CreeperFallEvent;
 import net.ethernity.lucky.event.willy.WillyLuckyEvents;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
 import net.minecraft.entity.EntityType;
@@ -73,6 +73,13 @@ public class LuckyEvents {
     public static final LuckyEvent INVERT_EVENT = register(
             "invert_event", LuckyEventBuilder.create(-1)
                     .applyEffect(LuckyWillyEffects.INVERT, 600)
+    );
+    public static final LuckyEvent GOOD_ARMOR_STAND_EVENT = register(
+            "good_armor_stand_event", new ArmorStandEvent(1)
+    );
+
+    public static final LuckyEvent BAD_ARMOR_STAND_EVENT = register(
+            "bad_armor_stand_event", new ArmorStandEvent(-1)
     );
 
     public static Identifier getId(LuckyEvent type) {
