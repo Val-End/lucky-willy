@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SlowTimeItem extends Item {
     private static final int EFFECT_DURATION = 600;
     private static final int COOLDOWN_DURATION = 3600;
-    private static final float SLOW_FACTOR = 0.5f;
+    private static final float SLOW_FACTOR = 0.25f;
     private PlayerEntity user;
 
     public SlowTimeItem(Settings settings) {
