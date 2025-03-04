@@ -1,6 +1,7 @@
 {
   "targets": [
-    "swap"
+    "swap",
+    "minecraft:main"
   ],
   "passes": [
     {

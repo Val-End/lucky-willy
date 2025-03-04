@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -25,7 +24,7 @@ public class CreeperFallFeature extends Feature<DefaultFeatureConfig> {
         BlockPos blockPos = context.getOrigin();
 
         int honeY = 20;
-        while(structureWorldAccess.isOutOfHeightLimit(blockPos.getY() - honeY)){
+        while (structureWorldAccess.isOutOfHeightLimit(blockPos.getY() - honeY)) {
             honeY--;
         }
 
@@ -33,7 +32,7 @@ public class CreeperFallFeature extends Feature<DefaultFeatureConfig> {
             for (int xPos = -1; xPos <= 1; xPos++) {
                 for (int zPos = -1; zPos <= 1; zPos++) {
                     BlockState block = air;
-                    if(yPos == -honeY)
+                    if (yPos == -honeY)
                         block = floor;
 
                     structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), block, Block.NOTIFY_LISTENERS);

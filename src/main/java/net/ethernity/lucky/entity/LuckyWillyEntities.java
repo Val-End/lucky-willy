@@ -23,7 +23,6 @@ public class LuckyWillyEntities {
     );
 
 
-
     private static EntityType register(String id, EntityType.Builder builder) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(LuckyWilly.MOD_ID, id), builder.build(id));
     }

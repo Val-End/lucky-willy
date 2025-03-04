@@ -3,14 +3,15 @@ package net.ethernity.lucky.world.gen;
 import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.world.gen.feature.AnvilTrapFeature;
 import net.ethernity.lucky.world.gen.feature.CreeperFallFeature;
-import net.ethernity.lucky.world.gen.feature.LavaTrapFeature;
 import net.ethernity.lucky.world.gen.feature.FourLuckyPyramidFeature;
+import net.ethernity.lucky.world.gen.feature.LavaTrapFeature;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 
 public class LuckyWillyFeature {
     public static final RegistryKey<Feature<?>> ANVIL_TRAP_KEY = register(
@@ -32,5 +33,6 @@ public class LuckyWillyFeature {
         return KEY;
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+    }
 }

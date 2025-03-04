@@ -28,42 +28,42 @@ public class LuckyEventCommand {
             Text.translatable("commands.lucky-event.invalidPosition")
     );
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access, CommandManager.RegistrationEnvironment environment){
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access, CommandManager.RegistrationEnvironment environment) {
         dispatcher.register(
-            CommandManager.literal("lucky-event")
-            .requires(source -> source.hasPermissionLevel(2))
-            .then(
-                CommandManager.argument("event", RegistryEntryReferenceArgumentType.registryEntry(access, LuckyWillyRegistryKeys.LUCKY_EVENT))
-                .suggests(LuckyWillySuggestionProvider.EXECUTABLE_EVENTS)
-                .executes(
-                    context -> execute(
-                        context.getSource(),
-                        LuckyWillyArgumentType.getExecutableEvent(context, "event"),
-                        context.getSource().getPosition(),
-                        Collections.singleton(context.getSource().getPlayerOrThrow())
-                    )
-                )
-                .then(CommandManager.argument("pos", Vec3ArgumentType.vec3())
-                    .executes(
-                        context -> execute(
-                            context.getSource(),
-                            LuckyWillyArgumentType.getExecutableEvent(context, "event"),
-                            Vec3ArgumentType.getVec3(context, "pos"),
-                            Collections.singleton(context.getSource().getPlayerOrThrow())
+                CommandManager.literal("lucky-event")
+                        .requires(source -> source.hasPermissionLevel(2))
+                        .then(
+                                CommandManager.argument("event", RegistryEntryReferenceArgumentType.registryEntry(access, LuckyWillyRegistryKeys.LUCKY_EVENT))
+                                        .suggests(LuckyWillySuggestionProvider.EXECUTABLE_EVENTS)
+                                        .executes(
+                                                context -> execute(
+                                                        context.getSource(),
+                                                        LuckyWillyArgumentType.getExecutableEvent(context, "event"),
+                                                        context.getSource().getPosition(),
+                                                        Collections.singleton(context.getSource().getPlayerOrThrow())
+                                                )
+                                        )
+                                        .then(CommandManager.argument("pos", Vec3ArgumentType.vec3())
+                                                .executes(
+                                                        context -> execute(
+                                                                context.getSource(),
+                                                                LuckyWillyArgumentType.getExecutableEvent(context, "event"),
+                                                                Vec3ArgumentType.getVec3(context, "pos"),
+                                                                Collections.singleton(context.getSource().getPlayerOrThrow())
+                                                        )
+                                                )
+                                                .then(CommandManager.argument("target", EntityArgumentType.players())
+                                                        .executes(
+                                                                context -> execute(
+                                                                        context.getSource(),
+                                                                        LuckyWillyArgumentType.getExecutableEvent(context, "event"),
+                                                                        Vec3ArgumentType.getVec3(context, "pos"),
+                                                                        EntityArgumentType.getPlayers(context, "target")
+                                                                )
+                                                        )
+                                                )
+                                        )
                         )
-                    )
-                    .then(CommandManager.argument("target", EntityArgumentType.players())
-                        .executes(
-                            context -> execute(
-                                context.getSource(),
-                                LuckyWillyArgumentType.getExecutableEvent(context, "event"),
-                                Vec3ArgumentType.getVec3(context, "pos"),
-                                EntityArgumentType.getPlayers(context, "target")
-                            )
-                        )
-                    )
-                )
-            )
         );
     }
 

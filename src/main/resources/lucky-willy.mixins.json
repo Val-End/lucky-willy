@@ -3,8 +3,8 @@
   "package": "net.ethernity.lucky.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "LivingRendererMixin",
-    "SpiderModelMixin"
+    "client.LivingRendererMixin",
+    "client.SpiderModelMixin"
   ],
   "mixins": [],
   "injectors": {

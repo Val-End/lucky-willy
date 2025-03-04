@@ -1,14 +1,17 @@
 {
-  "block.lucky-willy.weapon_lucky_block": "Weapon Lucky Block",
-  "block.lucky-willy.armor_lucky_block": "Armor Lucky Block",
-  "block.lucky-willy.willy_lucky_block": "Willy Lucky Block",
-  "block.lucky-willy.lucky_block": "Lucky Block",
-  "item.lucky-willy.trotuman_spawn_egg": "Trotuman Spawn Egg",
-  "entity.lucky-willy.trotuman": "Trotuman",
   "commands.lucky-event.success": "Lucky Event executed: %s",
   "commands.lucky-event.invalidPosition": "Invalid position for Lucky Event execution",
   "lucky-event.not_executable": "Can't execute %s Lucky Event",
+  "block.lucky-willy.lucky_block": "Lucky Block",
+  "block.lucky-willy.weapon_lucky_block": "Weapon Lucky Block",
+  "block.lucky-willy.armor_lucky_block": "Armor Lucky Block",
+  "block.lucky-willy.willy_lucky_block": "Willy Lucky Block",
+  "entity.lucky-willy.trotuman": "Trotuman",
   "effect.lucky-willy.tiny": "Tiny",
   "effect.lucky-willy.giant": "Giant",
-  "effect.lucky-willy.invert": "Invert"
+  "effect.lucky-willy.invert": "Invert",
+  "effect.lucky-willy.freeze": "Freeze",
+  "effect.lucky-willy.half_heart": "Half Heart",
+  "item.lucky-willy.trotuman_spawn_egg": "Trotuman Spawn Egg",
+  "item.lucky-willy.slow_time": "Slow Time Clock"
 }

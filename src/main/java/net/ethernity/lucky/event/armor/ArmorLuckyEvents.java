@@ -144,5 +144,6 @@ public class ArmorLuckyEvents {
         return register(id, supplier.get());
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+    }
 }

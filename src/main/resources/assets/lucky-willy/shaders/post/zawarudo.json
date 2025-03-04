@@ -1,0 +1,18 @@
+{
+  "targets": [
+    "swap",
+    "minecraft:main"
+  ],
+  "passes": [
+    {
+      "name": "lucky-willy:zawarudo",
+      "intarget": "minecraft:main",
+      "outtarget": "swap"
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}

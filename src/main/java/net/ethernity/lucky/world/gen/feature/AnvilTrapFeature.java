@@ -24,7 +24,7 @@ public class AnvilTrapFeature extends Feature<DefaultFeatureConfig> {
         JailGenerator.generate(structureWorldAccess, blockPos);
 
         int anvilY = 30;
-        while(structureWorldAccess.isOutOfHeightLimit(blockPos.getY() + anvilY)){
+        while (structureWorldAccess.isOutOfHeightLimit(blockPos.getY() + anvilY)) {
             anvilY--;
         }
 

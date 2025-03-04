@@ -19,9 +19,4 @@ public class ScaleStatusEffect extends StatusEffect {
                 EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE, identifier, amount, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
     }
-
-    @Override
-    public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        return true;
-    }
 }

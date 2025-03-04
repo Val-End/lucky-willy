@@ -19,7 +19,7 @@ public class LuckyWillySuggestionProvider extends SuggestionProviders {
                     LuckyWillyRegistries.LUCKY_EVENT.stream().filter(LuckyEvent::isExecutable),
                     builder,
                     LuckyEvents::getId,
-                    event -> Text.translatable(Util.createTranslationKey("entity", LuckyEvents.getId(event)))
+                    event -> Text.translatable(Util.createTranslationKey("event", LuckyEvents.getId(event)))
             )
     );
 }

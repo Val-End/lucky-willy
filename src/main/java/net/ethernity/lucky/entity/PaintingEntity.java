@@ -32,17 +32,22 @@ import java.util.*;
 
 public class PaintingEntity extends LivingEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private int attackCooldown = 0;
     private final Map<UUID, Integer> grabbedPlayers = new HashMap<>();
+    private int attackCooldown = 0;
 
     public PaintingEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    @Override
+    protected boolean isImmobile() {
+        return true;
+    }
+
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
                 .add(EntityAttributes.GENERIC_SCALE, 1)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1);
     }
@@ -69,7 +74,109 @@ public class PaintingEntity extends LivingEntity implements GeoEntity {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+        return this.cache;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getWorld().isClient)
+            return;
+
+        if (this.attackCooldown > 0)
+            this.attackCooldown--;
+
+        if (this.attackCooldown == 520) {
+            SoundEvent sound = SoundEvent.of(Identifier.of(LuckyWilly.MOD_ID, "painting_jumpscare"));
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), sound, SoundCategory.AMBIENT, 0.4f, 1f);
+        }
+
+        if (this.attackCooldown > 520)
+            return;
+
+        Iterator<Map.Entry<UUID, Integer>> iterator = this.grabbedPlayers.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, Integer> entry = iterator.next();
+            UUID playerId = entry.getKey();
+            int progress = entry.getValue();
+
+            PlayerEntity player = this.getWorld().getPlayerByUuid(playerId);
+            if (player == null || !player.isAlive() || !this.isAlive() || player.getBlockPos().getSquaredDistance(this.getBlockPos()) > 5) {
+                iterator.remove();
+                continue;
+            }
+
+            double targetY = this.getY() - (progress / 20.0) * 3;
+
+            float yaw = this.getYaw();
+            double factor = (20.0 - progress) / 15.0;
+            double offsetX = -Math.sin(Math.toRadians(yaw)) * factor * 0.9;
+            double offsetZ = Math.cos(Math.toRadians(yaw)) * factor * 0.9;
+
+            player.teleport(
+                    (ServerWorld) this.getWorld(),
+                    getX() + offsetX,
+                    targetY,
+                    getZ() + offsetZ,
+                    EnumSet.noneOf(PositionFlag.class),
+                    player.getYaw(),
+                    player.getPitch()
+            );
+
+            this.grabbedPlayers.put(playerId, progress + 1);
+
+            if (progress >= 20)
+                iterator.remove();
+        }
+    }
+
+    @Override
+    public Arm getMainArm() {
+        return Arm.RIGHT;
+    }
+
+    @Override
+    public void onPlayerCollision(PlayerEntity player) {
+        if (player.getWorld().isClient || this.attackCooldown > 0)
+            return;
+        if (player.isCreative() || player.isSpectator())
+            return;
+
+        this.attackCooldown = 600;
+        this.swingHand(Hand.MAIN_HAND);
+        SoundEvent sound = SoundEvent.of(Identifier.of(LuckyWilly.MOD_ID, "painting_voice"));
+        getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), sound, SoundCategory.AMBIENT, 0.3f, 1f);
+        player.addStatusEffect(new StatusEffectInstance(LuckyWillyEffects.FREEZE, 20 * 10, 2));
+
+        float yaw = this.getYaw();
+        double offsetX = -Math.sin(Math.toRadians(yaw)) * 0.9;
+        double offsetZ = Math.cos(Math.toRadians(yaw)) * 0.9;
+
+        player.teleport(
+                (ServerWorld) this.getWorld(),
+                this.getX() + offsetX,
+                player.getY(),
+                this.getZ() + offsetZ,
+                EnumSet.noneOf(PositionFlag.class),
+                player.getYaw(),
+                player.getPitch()
+        );
+
+        this.grabbedPlayers.put(player.getUuid(), 0);
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        this.grabbedPlayers.clear();
+    }
+
+    @Override
+    public void pushAwayFrom(Entity entity) {
+    }
+
+    @Override
+    protected void pushAway(Entity entity) {
     }
 
     @Override
@@ -88,109 +195,6 @@ public class PaintingEntity extends LivingEntity implements GeoEntity {
     }
 
     @Override
-    public void equipStack(EquipmentSlot slot, ItemStack stack) {}
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if (getWorld().isClient) return;
-
-        if (attackCooldown > 0)
-            attackCooldown--;
-
-        if (attackCooldown == 20 * 26) {
-            SoundEvent sound = SoundEvent.of(Identifier.of(LuckyWilly.MOD_ID, "painting_jumpscare"));
-            getWorld().playSound(null, getX(), getY(), getZ(), sound, SoundCategory.AMBIENT, 0.4f, 1f);
-        }
-
-        if (attackCooldown > 20 * 26) return;
-
-        Iterator<Map.Entry<UUID, Integer>> iterator = grabbedPlayers.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<UUID, Integer> entry = iterator.next();
-            UUID playerId = entry.getKey();
-            int progress = entry.getValue();
-
-            PlayerEntity player = getWorld().getPlayerByUuid(playerId);
-            if (player == null || !player.isAlive() || !this.isAlive() || player.getBlockPos().getSquaredDistance(this.getBlockPos()) > 5) {
-                iterator.remove();
-                continue;
-            }
-
-            ServerWorld serverWorld = (ServerWorld) getWorld();
-
-            double targetY = getY() - (progress / 20.0) * 3;
-
-            float yaw = getYaw();
-            double factor = (20.0 - progress) / 15.0;
-            double offsetX = -Math.sin(Math.toRadians(yaw)) * factor * 0.9;
-            double offsetZ = Math.cos(Math.toRadians(yaw)) * factor * 0.9;
-
-            player.teleport(
-                    serverWorld,
-                    getX() + offsetX,
-                    targetY,
-                    getZ() + offsetZ,
-                    EnumSet.noneOf(PositionFlag.class),
-                    player.getYaw(),
-                    player.getPitch()
-            );
-
-            grabbedPlayers.put(playerId, progress + 1);
-
-            if (progress >= 20) {
-                iterator.remove();
-            }
-        }
-    }
-
-    @Override
-    public Arm getMainArm() {
-        return Arm.RIGHT;
-    }
-
-    @Override
-    public void onPlayerCollision(PlayerEntity player) {
-        if (player.getWorld().isClient) return;
-        if (attackCooldown > 0) return;
-
-        if (player.isCreative() || player.isSpectator()) return;
-
-        attackCooldown = 20 * 30;
-        swingHand(Hand.MAIN_HAND);
-        SoundEvent sound = SoundEvent.of(Identifier.of(LuckyWilly.MOD_ID, "painting_voice"));
-        getWorld().playSound(null, getX(), getY(), getZ(), sound, SoundCategory.AMBIENT, 0.3f, 1f);
-        player.addStatusEffect(new StatusEffectInstance(LuckyWillyEffects.FREEZE, 20 * 10, 2));
-
-        ServerWorld serverWorld = (ServerWorld) getWorld();
-
-        float yaw = getYaw();
-        double offsetX = -Math.sin(Math.toRadians(yaw)) * 0.9;
-        double offsetZ = Math.cos(Math.toRadians(yaw)) * 0.9;
-
-        player.teleport(
-                serverWorld,
-                getX() + offsetX,
-                player.getY(),
-                getZ() + offsetZ,
-                EnumSet.noneOf(PositionFlag.class),
-                player.getYaw(),
-                player.getPitch()
-        );
-
-        grabbedPlayers.put(player.getUuid(), 0);
-    }
-
-    @Override
-    public void pushAwayFrom(Entity entity) {}
-
-    @Override
-    protected void pushAway(Entity entity) {}
-
-    @Override
-    public void onDeath(DamageSource damageSource) {
-        super.onDeath(damageSource);
-        grabbedPlayers.clear();
+    public void equipStack(EquipmentSlot slot, ItemStack stack) {
     }
 }

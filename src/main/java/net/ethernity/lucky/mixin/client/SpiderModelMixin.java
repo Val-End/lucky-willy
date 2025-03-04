@@ -1,4 +1,4 @@
-package net.ethernity.lucky.mixin;
+package net.ethernity.lucky.mixin.client;
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.ModelWithHead;

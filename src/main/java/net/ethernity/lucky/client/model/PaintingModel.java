@@ -9,7 +9,7 @@ import software.bernie.geckolib.model.GeoModel;
 public class PaintingModel extends GeoModel<PaintingEntity> {
     @Override
     public Identifier getModelResource(PaintingEntity paintingEntity) {
-        return Identifier.of(LuckyWilly.MOD_ID, "geo/painting.geo.json");
+        return Identifier.of(LuckyWilly.MOD_ID, "geo/entity/painting.geo.json");
     }
 
     @Override
@@ -19,11 +19,10 @@ public class PaintingModel extends GeoModel<PaintingEntity> {
 
     @Override
     public Identifier getAnimationResource(PaintingEntity paintingEntity) {
-        return Identifier.of(LuckyWilly.MOD_ID, "animations/painting.animation.json");
+        return Identifier.of(LuckyWilly.MOD_ID, "animations/entity/painting.animation.json");
     }
 
     @Override
     public void setCustomAnimations(PaintingEntity animatable, long instanceId, AnimationState<PaintingEntity> animationState) {
-
     }
 }

@@ -4,8 +4,8 @@ import net.ethernity.lucky.event.LuckyEvent;
 import net.ethernity.lucky.world.gen.LuckyWillyFeature;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class CreeperFallEvent extends LuckyEvent {
     public CreeperFallEvent() {
@@ -13,7 +13,7 @@ public class CreeperFallEvent extends LuckyEvent {
     }
 
     @Override
-    public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
+    public void execute(BlockPos pos, World world, PlayerEntity player) {
         this.spawnMob(EntityType.CREEPER, world, player.getBlockPos().add(0, 30, 0));
         this.placeFeature(LuckyWillyFeature.CREEPER_FALL_KEY, world, player);
     }

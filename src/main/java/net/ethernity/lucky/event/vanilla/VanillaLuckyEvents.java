@@ -76,7 +76,9 @@ public final class VanillaLuckyEvents {
         return register(id, supplier.get());
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+    }
 
-    private VanillaLuckyEvents() {}
+    private VanillaLuckyEvents() {
+    }
 }

@@ -16,9 +16,9 @@ public class JailGenerator {
             for (int xPos = -1; xPos <= 1; xPos++) {
                 for (int zPos = -1; zPos <= 1; zPos++) {
                     BlockState block = air;
-                    if(yPos == -1)
+                    if (yPos == -1)
                         block = floor;
-                    else if(!(xPos == 0 && zPos == 0))
+                    else if (!(xPos == 0 && zPos == 0))
                         block = ironBars;
 
                     structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), block, Block.NOTIFY_LISTENERS);

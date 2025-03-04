@@ -1,4 +1,4 @@
-package net.ethernity.lucky.mixin;
+package net.ethernity.lucky.mixin.client;
 
 import net.ethernity.lucky.client.renderer.feature.SpiderHeadFeature;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -6,10 +6,8 @@ import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.SpiderEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MobEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,19 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(LivingEntityRenderer.class)
-public abstract class LivingRendererMixin<T extends LivingEntity, M extends EntityModel<T>> implements FeatureRendererContext<T, M>{
+public abstract class LivingRendererMixin<T extends LivingEntity, M extends EntityModel<T>> implements FeatureRendererContext<T, M> {
     @Final
     @Shadow
     protected List<FeatureRenderer<T, M>> features;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(EntityRendererFactory.Context ctx, M model, float shadowRadius, CallbackInfo ci) {
-        if ((Object) this instanceof SpiderEntityRenderer renderer) {
-            features.add(new SpiderHeadFeature<>(
-                    renderer,
-                    ctx.getModelLoader(),
-                    ctx.getHeldItemRenderer()
-            ));
-        }
+        if ((Object) this instanceof SpiderEntityRenderer renderer)
+            features.add(new SpiderHeadFeature<>(renderer, ctx.getModelLoader()));
     }
 }

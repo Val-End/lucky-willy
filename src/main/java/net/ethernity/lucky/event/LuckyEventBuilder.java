@@ -18,6 +18,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
@@ -110,8 +111,10 @@ public class LuckyEventBuilder {
 
     public LuckyEventBuilder placeFeature(RegistryKey<Feature<?>> key, boolean placeOnPlayer) {
         return this.withAction(ctx -> {
+            if (!(ctx.world() instanceof ServerWorld world))
+                return;
+
             BlockPos pos = placeOnPlayer ? ctx.player().getBlockPos() : ctx.pos();
-            ServerWorld world = ctx.world();
 
             Optional<Feature<?>> feature = world.getRegistryManager().get(RegistryKeys.FEATURE)
                     .getEntry(key)
@@ -143,7 +146,7 @@ public class LuckyEventBuilder {
     public LuckyEvent build() {
         return new LuckyEvent(lucky) {
             @Override
-            public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
+            public void execute(BlockPos pos, World world, PlayerEntity player) {
                 ExecutionContext context = new ExecutionContext(pos, world, player);
                 for (Consumer<ExecutionContext> action : actions) {
                     action.accept(context);
@@ -152,5 +155,6 @@ public class LuckyEventBuilder {
         };
     }
 
-    public record ExecutionContext(BlockPos pos, ServerWorld world, PlayerEntity player) {}
+    public record ExecutionContext(BlockPos pos, World world, PlayerEntity player) {
+    }
 }

@@ -5,7 +5,6 @@ import net.ethernity.lucky.entity.effect.LuckyWillyEffects;
 import net.ethernity.lucky.event.LuckyEvent;
 import net.ethernity.lucky.event.LuckyEventBuilder;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
-import net.ethernity.lucky.util.ItemUtil;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registry;
@@ -49,9 +48,7 @@ public class WillyLuckyEvents {
             "grenade_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("pointblank", "grenade"), 6)
     );
-    public static final LuckyEvent SCREAMER_EVENT = register("screamer_event",
-            LuckyEventBuilder.create(-1).applyEffect(LuckyWillyEffects.SCREAMER, 2, 1)
-    );
+    public static final LuckyEvent SCREAMER_EVENT = register("screamer_event", ScreamerEvent::new);
     public static final LuckyEvent RESONARIUM_HELMET_EVENT = register(
             "resonarium_helmet_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("deeperdarker", "resonarium_helmet"))
@@ -112,11 +109,14 @@ public class WillyLuckyEvents {
             "dragon_sword_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("dragonloot", "dragon_sword"))
     );
+    public static final LuckyEvent HALF_HEART_EVENT = register(
+            "half_heart_event", LuckyEventBuilder.create(-1)
+                    .applyEffect(LuckyWillyEffects.HALF_HEART, 20)
+    );
 
     public static final LuckyEvent ZOMBIE_EVENT = register("zombie_event", new MobWithHeadEvent<>(EntityType.ZOMBIE));
     public static final LuckyEvent SKELETON_EVENT = register("skeleton_event", new MobWithHeadEvent<>(EntityType.SKELETON));
     public static final LuckyEvent SPIDER_EVENT = register("spider_event", new MobWithHeadEvent<>(EntityType.SPIDER));
-    public static final LuckyEvent HALF_HEART_EVENT = register("half_heart_event", HalfHeartEvent::new);
     public static final LuckyEvent TROTUMAN_EVENT = register("trotuman_event", TrotumanEvent::new);
     public static final LuckyEvent EQUIP_PUMPKIN_EVENT = register("equip_pumpkin_event", new EquipCurseEvent(Items.CARVED_PUMPKIN));
     public static final LuckyEvent EQUIP_CURSED_CHESTPLATE_EVENT = register("equip_cursed_chestplate_event", new EquipCurseEvent(Items.GOLDEN_CHESTPLATE));
@@ -135,5 +135,6 @@ public class WillyLuckyEvents {
         return register(id, supplier.get());
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+    }
 }

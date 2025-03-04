@@ -37,7 +37,7 @@ public class FourLuckyPyramidFeature extends Feature<DefaultFeatureConfig> {
                         block = this.wall;
                     else if (yPos == 0 && absX == 1 && absZ == 1)
                         block = this.lucky;
-                    else if(yPos == 2 && absX == 2 && absZ == 2)
+                    else if (yPos == 2 && absX == 2 && absZ == 2)
                         block = this.gold;
 
                     structureWorldAccess.setBlockState(blockPos.add(xPos, yPos, zPos), block, Block.NOTIFY_LISTENERS);

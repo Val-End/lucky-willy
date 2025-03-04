@@ -7,8 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class RandomChestLootEvent extends LuckyEvent {
     }
 
     @Override
-    public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
+    public void execute(BlockPos pos, World world, PlayerEntity player) {
         world.setBlockState(pos, Blocks.CHEST.getDefaultState());
         ChestBlockEntity chest = (ChestBlockEntity) world.getBlockEntity(pos);
-        if(chest == null)
+        if (chest == null)
             return;
 
         List<RegistryKey<LootTable>> lootTableList = LootTables.getAll()

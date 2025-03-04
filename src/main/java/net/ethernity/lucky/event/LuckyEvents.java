@@ -1,14 +1,14 @@
 package net.ethernity.lucky.event;
 
 import net.ethernity.lucky.LuckyWilly;
+import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.ethernity.lucky.entity.effect.LuckyWillyEffects;
 import net.ethernity.lucky.event.armor.ArmorLuckyEvents;
-import net.ethernity.lucky.event.global.ExplosionEvent;
-import net.ethernity.lucky.event.global.PaintingEvent;
-import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
-import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
 import net.ethernity.lucky.event.global.ArmorStandEvent;
 import net.ethernity.lucky.event.global.CreeperFallEvent;
+import net.ethernity.lucky.event.global.ExplosionEvent;
+import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
+import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
 import net.ethernity.lucky.event.willy.WillyLuckyEvents;
 import net.ethernity.lucky.registry.LuckyWillyRegistries;
 import net.minecraft.entity.EntityType;
@@ -83,7 +83,10 @@ public class LuckyEvents {
             "bad_armor_stand_event", new ArmorStandEvent(-1)
     );
 
-    public static final LuckyEvent PAINTING_EVENT = register("painting_event", PaintingEvent::new);
+    public static final LuckyEvent PAINTING_EVENT = register(
+            "painting_event", LuckyEventBuilder.create(-1)
+                    .spawnMob(LuckyWillyEntities.PAINTING)
+    );
 
     public static Identifier getId(LuckyEvent type) {
         return LuckyWillyRegistries.LUCKY_EVENT.getId(type);

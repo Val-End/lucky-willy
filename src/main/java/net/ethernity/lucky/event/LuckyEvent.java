@@ -17,6 +17,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
@@ -60,17 +61,17 @@ public abstract class LuckyEvent {
     /**
      * Executes this event at the specified position.
      *
-     * @param pos The position where the event occurs
-     * @param world The world in which the event occurs
+     * @param pos    The position where the event occurs
+     * @param world  The world in which the event occurs
      * @param player The player triggering the event
      */
-    public abstract void execute(BlockPos pos, ServerWorld world, PlayerEntity player);
+    public abstract void execute(BlockPos pos, World world, PlayerEntity player);
 
 
     /**
      * Gives an item from another mod to a player.
      *
-     * @param id The identifier of the mod item
+     * @param id     The identifier of the mod item
      * @param player The player to receive the item
      */
     protected void giveStack(Identifier id, PlayerEntity player) {
@@ -81,7 +82,7 @@ public abstract class LuckyEvent {
     /**
      * Gives an item to a player.
      *
-     * @param item The item to give
+     * @param item   The item to give
      * @param player The player to receive the item
      */
     protected void giveStack(Item item, PlayerEntity player) {
@@ -91,7 +92,7 @@ public abstract class LuckyEvent {
     /**
      * Gives an item to a player.
      *
-     * @param stack The item to give
+     * @param stack  The item to give
      * @param player The player to receive the item
      */
     protected void giveStack(ItemStack stack, PlayerEntity player) {
@@ -102,11 +103,11 @@ public abstract class LuckyEvent {
     /**
      * Drops an item from another mod at a specific position.
      *
-     * @param id The identifier of the mod item
+     * @param id    The identifier of the mod item
      * @param world The world to drop the item in
-     * @param pos The position to drop the item at
+     * @param pos   The position to drop the item at
      */
-    protected void dropStack(Identifier id, ServerWorld world, BlockPos pos) {
+    protected void dropStack(Identifier id, World world, BlockPos pos) {
         LuckyWilly.LOGGER.info("External item: {}", id);
         this.dropStack(ItemUtil.modStack(id), world, pos);
     }
@@ -114,11 +115,11 @@ public abstract class LuckyEvent {
     /**
      * Drops an item at a specific position.
      *
-     * @param item The item to drop
+     * @param item  The item to drop
      * @param world The world to drop the item in
-     * @param pos The position to drop the item at
+     * @param pos   The position to drop the item at
      */
-    protected void dropStack(Item item, ServerWorld world, BlockPos pos) {
+    protected void dropStack(Item item, World world, BlockPos pos) {
         this.dropStack(item.getDefaultStack(), world, pos);
     }
 
@@ -127,9 +128,9 @@ public abstract class LuckyEvent {
      *
      * @param stack The item to drop
      * @param world The world to drop the item in
-     * @param pos The position to drop the item at
+     * @param pos   The position to drop the item at
      */
-    protected void dropStack(ItemStack stack, ServerWorld world, BlockPos pos) {
+    protected void dropStack(ItemStack stack, World world, BlockPos pos) {
         LuckyWilly.LOGGER.info("Dropping item: {}", stack.toString());
         Block.dropStack(world, pos, stack);
     }
@@ -137,11 +138,11 @@ public abstract class LuckyEvent {
     /**
      * Spawns a mob from another mod at a specific position.
      *
-     * @param id The identifier of the mod entity
+     * @param id    The identifier of the mod entity
      * @param world The world to spawn the entity in
-     * @param pos The position to spawn the entity at
+     * @param pos   The position to spawn the entity at
      */
-    protected void spawnMob(Identifier id, ServerWorld world, BlockPos pos) {
+    protected void spawnMob(Identifier id, World world, BlockPos pos) {
         if (!FabricLoader.getInstance().isModLoaded(id.getNamespace())) {
             LuckyWilly.LOGGER.warn("Mod {} is not loaded, cannot spawn entity", id.getNamespace());
             return;
@@ -154,12 +155,12 @@ public abstract class LuckyEvent {
     /**
      * Spawns a mob of a specific type at a position.
      *
-     * @param <T> The entity type
-     * @param type The entity type to spawn
+     * @param <T>   The entity type
+     * @param type  The entity type to spawn
      * @param world The world to spawn the entity in
-     * @param pos The position to spawn the entity at
+     * @param pos   The position to spawn the entity at
      */
-    protected <T extends Entity> void spawnMob(EntityType<T> type, ServerWorld world, BlockPos pos) {
+    protected <T extends Entity> void spawnMob(EntityType<T> type, World world, BlockPos pos) {
         T entity = type.create(world);
         if (entity != null)
             this.spawnMob(entity, world, pos);
@@ -170,12 +171,12 @@ public abstract class LuckyEvent {
     /**
      * Spawns a pre-created entity at a position.
      *
-     * @param <T> The entity type
+     * @param <T>    The entity type
      * @param entity The entity to spawn
-     * @param world The world to spawn the entity in
-     * @param pos The position to spawn the entity at
+     * @param world  The world to spawn the entity in
+     * @param pos    The position to spawn the entity at
      */
-    protected <T extends Entity> void spawnMob(T entity, ServerWorld world, BlockPos pos) {
+    protected <T extends Entity> void spawnMob(T entity, World world, BlockPos pos) {
         entity.refreshPositionAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
         world.spawnEntity(entity);
         LuckyWilly.LOGGER.warn("Mob Spawned: {}", entity.getType().toString());
@@ -184,22 +185,25 @@ public abstract class LuckyEvent {
     /**
      * Places a feature at a player's position.
      *
-     * @param key The registry key of the feature
-     * @param world The world to place the feature in
+     * @param key    The registry key of the feature
+     * @param world  The world to place the feature in
      * @param player The player whose position to use
      */
-    protected void placeFeature(RegistryKey<Feature<?>> key, ServerWorld world, PlayerEntity player) {
+    protected void placeFeature(RegistryKey<Feature<?>> key, World world, PlayerEntity player) {
         this.placeFeature(key, world, player.getBlockPos());
     }
 
     /**
      * Places a feature at a specific position.
      *
-     * @param key The registry key of the feature
+     * @param key   The registry key of the feature
      * @param world The world to place the feature in
-     * @param pos The position to place the feature at
+     * @param pos   The position to place the feature at
      */
-    protected void placeFeature(RegistryKey<Feature<?>> key, ServerWorld world, BlockPos pos) {
+    protected void placeFeature(RegistryKey<Feature<?>> key, World wrld, BlockPos pos) {
+        if (!(wrld instanceof ServerWorld world))
+            return;
+
         Optional<Feature<?>> feature = world.getRegistryManager().get(RegistryKeys.FEATURE)
                 .getEntry(key)
                 .flatMap(entry -> Optional.ofNullable(entry.value()));
@@ -211,12 +215,12 @@ public abstract class LuckyEvent {
 
         LuckyWilly.LOGGER.warn("Placing Feature: {}", key.toString());
         feature.get().generate(new FeatureContext<>(
-            Optional.empty(),
-            world,
-            world.getChunkManager().getChunkGenerator(),
-            world.getRandom(),
-            pos,
-            null
+                Optional.empty(),
+                world,
+                world.getChunkManager().getChunkGenerator(),
+                world.getRandom(),
+                pos,
+                null
         ));
     }
 

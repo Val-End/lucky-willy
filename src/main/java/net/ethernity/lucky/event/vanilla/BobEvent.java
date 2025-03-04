@@ -8,7 +8,6 @@ import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -21,7 +20,7 @@ public class BobEvent extends LuckyEvent {
     }
 
     @Override
-    public void execute(BlockPos pos, ServerWorld world, PlayerEntity player) {
+    public void execute(BlockPos pos, World world, PlayerEntity player) {
         ZombieEntity bob = new ZombieEntity(world);
         bob.equipStack(EquipmentSlot.HEAD, this.createEnchantedItem(Items.DIAMOND_HELMET, world));
         bob.equipStack(EquipmentSlot.CHEST, this.createEnchantedItem(Items.DIAMOND_CHESTPLATE, world));

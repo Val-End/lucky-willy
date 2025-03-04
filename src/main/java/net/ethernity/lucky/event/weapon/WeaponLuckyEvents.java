@@ -109,5 +109,6 @@ public class WeaponLuckyEvents {
         return register(id, supplier.get());
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+    }
 }
