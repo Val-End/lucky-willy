@@ -7,6 +7,7 @@ import net.ethernity.lucky.event.armor.ArmorLuckyEvents;
 import net.ethernity.lucky.event.global.ArmorStandEvent;
 import net.ethernity.lucky.event.global.CreeperFallEvent;
 import net.ethernity.lucky.event.global.ExplosionEvent;
+import net.ethernity.lucky.event.global.SwitchCameraEvent;
 import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
 import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
 import net.ethernity.lucky.event.willy.WillyLuckyEvents;
@@ -63,6 +64,8 @@ public class LuckyEvents {
     );
     public static final LuckyEvent CREEPER_FALL_EVENT = register("creeper_fall_event", CreeperFallEvent::new);
     public static final LuckyEvent EXPLOSION_EVENT = register("explosion_event", ExplosionEvent::new);
+    public static final LuckyEvent SWITCH_CAMERA_EVENT = register("switch_camera_event", SwitchCameraEvent::new);
+
     public static final LuckyEvent TINY_SCALE_EVENT = register(
             "tiny_scale_event", LuckyEventBuilder.create(0)
                     .applyEffect(LuckyWillyEffects.TINY, 600, 8)
