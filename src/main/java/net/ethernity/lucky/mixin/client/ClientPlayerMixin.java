@@ -28,7 +28,7 @@ public abstract class ClientPlayerMixin {
 
         if(!isAlive)
             client.setCameraEntity(LuckyWillyClient.getPlayerEntity());
-        if(client.getCameraEntity() instanceof PlayerEntity)
+        if(client.getCameraEntity().equals(LuckyWillyClient.getPlayerEntity()))
             LuckyWillyClient.clearPlayerEntity();
     }
 }

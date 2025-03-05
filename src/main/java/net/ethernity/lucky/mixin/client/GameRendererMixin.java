@@ -51,10 +51,10 @@ public abstract class GameRendererMixin {
             cir.setReturnValue(false);
         }
 
-        Entity entity = LuckyWillyClient.getPlayerEntity() == null ? this.client.getCameraEntity() : LuckyWillyClient.getPlayerEntity();
+        PlayerEntity entity = LuckyWillyClient.getPlayerEntity() == null ? (PlayerEntity) this.client.getCameraEntity() : LuckyWillyClient.getPlayerEntity();
         boolean bl = !this.client.options.hudHidden;
-        if (bl && !((PlayerEntity)entity).getAbilities().allowModifyWorld) {
-            ItemStack itemStack = ((LivingEntity)entity).getMainHandStack();
+        if (bl && !entity.getAbilities().allowModifyWorld) {
+            ItemStack itemStack = entity.getMainHandStack();
             HitResult hitResult = this.client.crosshairTarget;
             if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockPos blockPos = ((BlockHitResult)hitResult).getBlockPos();
