@@ -11,37 +11,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SwitchCameraEvent extends LuckyEvent {
-    private PlayerEntity player;
-
     public SwitchCameraEvent() {
         super(-1);
     }
 
     @Override
     public void execute(BlockPos pos, World world, PlayerEntity player) {
-        this.setPlayer(player);
-        LivingEntity nearestEntity = world.getEntitiesByClass(LivingEntity.class, player.getBoundingBox().expand(50), this::predicate)
-                .stream().min(this::compare).orElse(null);
+        LivingEntity nearestEntity = world.getEntitiesByClass(LivingEntity.class, player.getBoundingBox()
+                        .expand(50), (entity) -> this.predicate(entity, player))
+                .stream().min((e1, e2) -> this.compare(e1, e2, player)).orElse(null);
 
         if (nearestEntity != null && player instanceof ServerPlayerEntity serverPlayer) {
             LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(nearestEntity.getId()));
-            LuckyWilly.queueServerWork(600, () -> LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(this.getPlayer().getId())));
+            LuckyWilly.queueServerWork(600, () -> LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(serverPlayer.getId())));
         }
     }
 
-    private void setPlayer(PlayerEntity player) {
-        this.player = player;
+    private boolean predicate(LivingEntity entity, PlayerEntity player) {
+        return entity != player && entity.isAlive();
     }
 
-    private PlayerEntity getPlayer() {
-        return this.player;
-    }
-
-    private boolean predicate(LivingEntity entity) {
-        return entity != this.getPlayer() && entity.isAlive();
-    }
-
-    private int compare(LivingEntity e1, LivingEntity e2) {
-        return Float.compare(e1.distanceTo(this.getPlayer()), e2.distanceTo(this.getPlayer()));
+    private int compare(LivingEntity e1, LivingEntity e2, PlayerEntity player) {
+        return Float.compare(e1.distanceTo(player), e2.distanceTo(player));
     }
 }

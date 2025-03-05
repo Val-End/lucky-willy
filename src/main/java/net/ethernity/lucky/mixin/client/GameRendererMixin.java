@@ -1,11 +1,10 @@
 package net.ethernity.lucky.mixin.client;
 
-import net.ethernity.lucky.network.LuckyWillyNetwork;
+import net.ethernity.lucky.client.LuckyWillyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.Entity;
@@ -52,7 +51,7 @@ public abstract class GameRendererMixin {
             cir.setReturnValue(false);
         }
 
-        Entity entity = LuckyWillyNetwork.getPlayerEntity() == null ? this.client.getCameraEntity() : LuckyWillyNetwork.getPlayerEntity();
+        Entity entity = LuckyWillyClient.getPlayerEntity() == null ? this.client.getCameraEntity() : LuckyWillyClient.getPlayerEntity();
         boolean bl = !this.client.options.hudHidden;
         if (bl && !((PlayerEntity)entity).getAbilities().allowModifyWorld) {
             ItemStack itemStack = ((LivingEntity)entity).getMainHandStack();
@@ -75,16 +74,16 @@ public abstract class GameRendererMixin {
 
     @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true)
     private void findCrosshairTarget(Camera camera, float tickDelta, Matrix4f matrix4f, CallbackInfo ci) {
-        if(LuckyWillyNetwork.getPlayerEntity() != null)
+        if(LuckyWillyClient.getPlayerEntity() != null)
             ci.cancel();
     }
 
     @Inject(method = "findCrosshairTarget", at = @At("HEAD"), cancellable = true)
     private void findCrosshairTarget(Entity camera, double blockInteractionRange, double entityInteractionRange, float tickDelta, CallbackInfoReturnable<HitResult> cir) {
-        if(LuckyWillyNetwork.getPlayerEntity() == null)
+        if(LuckyWillyClient.getPlayerEntity() == null)
             return;
 
-        camera = LuckyWillyNetwork.getPlayerEntity();
+        camera = LuckyWillyClient.getPlayerEntity();
         double d = Math.max(blockInteractionRange, entityInteractionRange);
         double e = MathHelper.square(d);
         Vec3d vec3d = camera.getCameraPosVec(tickDelta);

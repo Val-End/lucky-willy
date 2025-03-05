@@ -1,6 +1,6 @@
 package net.ethernity.lucky.mixin.client;
 
-import net.ethernity.lucky.network.LuckyWillyNetwork;
+import net.ethernity.lucky.client.LuckyWillyClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,8 +27,8 @@ public abstract class ClientPlayerMixin {
         boolean isAlive = client.getCameraEntity().isAlive();
 
         if(!isAlive)
-            client.setCameraEntity(LuckyWillyNetwork.getPlayerEntity());
+            client.setCameraEntity(LuckyWillyClient.getPlayerEntity());
         if(client.getCameraEntity() instanceof PlayerEntity)
-            LuckyWillyNetwork.clearPlayerEntity();
+            LuckyWillyClient.clearPlayerEntity();
     }
 }

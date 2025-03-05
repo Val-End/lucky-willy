@@ -1,7 +1,7 @@
 package net.ethernity.lucky.mixin.client;
 
+import net.ethernity.lucky.client.LuckyWillyClient;
 import net.ethernity.lucky.client.renderer.feature.SpiderHeadFeature;
-import net.ethernity.lucky.network.LuckyWillyNetwork;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -37,13 +37,9 @@ public abstract class LivingRendererMixin<T extends LivingEntity, M extends Enti
 
     @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("HEAD"), cancellable = true)
     private void render(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (LuckyWillyNetwork.getPlayerEntity() != null) {
+        if (LuckyWillyClient.getPlayerEntity() != null) {
             MinecraftClient client = MinecraftClient.getInstance();
-            Perspective perspective = client.options.getPerspective();
-
-            if(!(client.getCameraEntity() instanceof PlayerEntity)
-                    && client.getCameraEntity().equals(livingEntity)
-                    && perspective.isFirstPerson())
+            if(client.getCameraEntity().equals(livingEntity) && client.options.getPerspective().isFirstPerson())
                 ci.cancel();
         }
     }
