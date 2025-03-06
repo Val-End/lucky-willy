@@ -1,9 +1,10 @@
 package net.ethernity.lucky.event.global;
 
-import net.ethernity.lucky.LuckyWilly;
+import net.ethernity.lucky.entity.PaintingEntity;
 import net.ethernity.lucky.event.LuckyEvent;
 import net.ethernity.lucky.network.LuckyWillyNetwork;
 import net.ethernity.lucky.network.packet.s2c.SwitchCameraPayload;
+import net.ethernity.lucky.server.LuckyWillyServer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,12 +24,12 @@ public class SwitchCameraEvent extends LuckyEvent {
 
         if (nearestEntity != null && player instanceof ServerPlayerEntity serverPlayer) {
             LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(nearestEntity.getId()));
-            LuckyWilly.queueServerWork(600, () -> LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(serverPlayer.getId())));
+            LuckyWillyServer.queueWork(600, () -> LuckyWillyNetwork.s2c(serverPlayer, new SwitchCameraPayload(serverPlayer.getId())));
         }
     }
 
     private boolean predicate(LivingEntity entity, PlayerEntity player) {
-        return entity != player && entity.isAlive();
+        return entity != player && entity.isAlive() && !(entity instanceof PaintingEntity);
     }
 
     private int compare(LivingEntity e1, LivingEntity e2, PlayerEntity player) {

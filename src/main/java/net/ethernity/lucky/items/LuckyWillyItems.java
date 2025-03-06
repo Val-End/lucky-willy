@@ -19,7 +19,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class LuckyWillyItems {
-    public static final Item SLOW_TIME_ITEM = register(new SlowTimeItem(new Item.Settings()), "slow_time");
+    public static final Item SLOW_TIME_ITEM = register(new SlowTimeItem(new Item.Settings().maxCount(1).maxDamage(0)), "slow_time");
     public static final Item TROTUMAN_SPAWN_EGG = registerEgg("trotuman", LuckyWillyEntities.TROTUMAN, 0x0AF991, 0x001F8B);
 
     private static Item registerEgg(String id, EntityType entity, int firstColor, int secondColor) {

@@ -1,6 +1,6 @@
 package net.ethernity.lucky.mixin.client;
 
-import net.ethernity.lucky.client.LuckyWillyClient;
+import net.ethernity.lucky.client.network.LuckyWillyClientNetwork;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
@@ -15,13 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class InGameHudMixin {
     @Inject(method = "getCameraPlayer", at = @At("HEAD"), cancellable = true)
     private void getCameraPlayer(CallbackInfoReturnable<PlayerEntity> cir) {
-        if(LuckyWillyClient.getPlayerEntity() != null)
-            cir.setReturnValue(LuckyWillyClient.getPlayerEntity());
+        if (LuckyWillyClientNetwork.getPlayerEntity() != null)
+            cir.setReturnValue(LuckyWillyClientNetwork.getPlayerEntity());
     }
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
     private void renderCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        if(LuckyWillyClient.getPlayerEntity() != null)
+        if (LuckyWillyClientNetwork.getPlayerEntity() != null)
             ci.cancel();
     }
 }

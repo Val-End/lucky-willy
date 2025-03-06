@@ -19,25 +19,15 @@ public class WillyLuckyEvents {
             "staff_sound_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("gobber2", "gobber2_staff_sound"))
     );
-    public static final LuckyEvent NETHERITE_HOE_EVENT = register(
-            "netherite_hoe_event", LuckyEventBuilder.create(-1)
-                    .dropStack(Items.NETHERITE_HOE)
-    );
-    public static final LuckyEvent BUCKETS_EVENT = register(
-            "buckets_event", LuckyEventBuilder.create(1)
-                    .dropStack(Items.WATER_BUCKET)
-                    .dropStack(Items.LAVA_BUCKET)
-                    .dropStack(Items.POWDER_SNOW_BUCKET)
-    );
     public static final LuckyEvent MINIGUN_EVENT = register(
             "minigun_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("pointblank", "m134minigun"))
-                    .dropStack(Identifier.of("pointblank", "ammo556"), 50)
+                    .dropStack(Identifier.of("pointblank", "ammo556"), 20)
     );
     public static final LuckyEvent GRENADE_LAUNCHER_EVENT = register(
             "grenade_launcher_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("pointblank", "m32mgl"))
-                    .dropStack(Identifier.of("pointblank", "grenade40mm"), 6)
+                    .dropStack(Identifier.of("pointblank", "grenade40mm"), 2)
     );
     public static final LuckyEvent ROCKET_LAUNCHER_EVENT = register(
             "rocket_launcher_event", LuckyEventBuilder.create(1)
@@ -46,7 +36,7 @@ public class WillyLuckyEvents {
     );
     public static final LuckyEvent GRENADE_EVENT = register(
             "grenade_event", LuckyEventBuilder.create(1)
-                    .dropStack(Identifier.of("pointblank", "grenade"), 6)
+                    .dropStack(Identifier.of("pointblank", "grenade"), 1)
     );
     public static final LuckyEvent SCREAMER_EVENT = register("screamer_event", ScreamerEvent::new);
     public static final LuckyEvent RESONARIUM_HELMET_EVENT = register(

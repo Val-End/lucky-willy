@@ -22,6 +22,11 @@ public class WeaponLuckyEvents {
                     .dropStack(Items.STONE_SWORD)
     );
 
+    public static final LuckyEvent NETHERITE_HOE_EVENT = register(
+            "netherite_hoe_event", LuckyEventBuilder.create(-1)
+                    .dropStack(Items.NETHERITE_HOE)
+    );
+
     public static final LuckyEvent M4A1_EVENT = register(
             "m4a1_event", LuckyEventBuilder.create(1)
                     .dropStack(Identifier.of("pointblank", "m4a1"))

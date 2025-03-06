@@ -1,6 +1,6 @@
 package net.ethernity.lucky.mixin.client;
 
-import net.ethernity.lucky.client.LuckyWillyClient;
+import net.ethernity.lucky.client.network.LuckyWillyClientNetwork;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.pattern.CachedBlockPosition;
@@ -8,7 +8,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
@@ -51,20 +50,19 @@ public abstract class GameRendererMixin {
             cir.setReturnValue(false);
         }
 
-        PlayerEntity entity = LuckyWillyClient.getPlayerEntity() == null ? (PlayerEntity) this.client.getCameraEntity() : LuckyWillyClient.getPlayerEntity();
+        PlayerEntity entity = LuckyWillyClientNetwork.getPlayerEntity() == null ? (PlayerEntity) this.client.getCameraEntity() : LuckyWillyClientNetwork.getPlayerEntity();
         boolean bl = !this.client.options.hudHidden;
         if (bl && !entity.getAbilities().allowModifyWorld) {
             ItemStack itemStack = entity.getMainHandStack();
             HitResult hitResult = this.client.crosshairTarget;
             if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK) {
-                BlockPos blockPos = ((BlockHitResult)hitResult).getBlockPos();
+                BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
                 BlockState blockState = this.client.world.getBlockState(blockPos);
                 if (this.client.interactionManager.getCurrentGameMode() != GameMode.SPECTATOR) {
                     CachedBlockPosition cachedBlockPosition = new CachedBlockPosition(this.client.world, blockPos, false);
                     Registry<Block> registry = this.client.world.getRegistryManager().get(RegistryKeys.BLOCK);
                     bl = !itemStack.isEmpty() && (itemStack.canBreak(cachedBlockPosition) || itemStack.canPlaceOn(cachedBlockPosition));
-                }
-                else
+                } else
                     bl = blockState.createScreenHandlerFactory(this.client.world, blockPos) != null;
             }
         }
@@ -74,16 +72,16 @@ public abstract class GameRendererMixin {
 
     @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true)
     private void findCrosshairTarget(Camera camera, float tickDelta, Matrix4f matrix4f, CallbackInfo ci) {
-        if(LuckyWillyClient.getPlayerEntity() != null)
+        if (LuckyWillyClientNetwork.getPlayerEntity() != null)
             ci.cancel();
     }
 
     @Inject(method = "findCrosshairTarget", at = @At("HEAD"), cancellable = true)
     private void findCrosshairTarget(Entity camera, double blockInteractionRange, double entityInteractionRange, float tickDelta, CallbackInfoReturnable<HitResult> cir) {
-        if(LuckyWillyClient.getPlayerEntity() == null)
+        if (LuckyWillyClientNetwork.getPlayerEntity() == null)
             return;
 
-        camera = LuckyWillyClient.getPlayerEntity();
+        camera = LuckyWillyClientNetwork.getPlayerEntity();
         double d = Math.max(blockInteractionRange, entityInteractionRange);
         double e = MathHelper.square(d);
         Vec3d vec3d = camera.getCameraPosVec(tickDelta);

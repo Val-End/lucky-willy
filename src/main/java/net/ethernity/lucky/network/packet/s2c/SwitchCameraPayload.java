@@ -7,8 +7,6 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
 
-import java.util.UUID;
-
 public record SwitchCameraPayload(int target) implements CustomPayload {
     public static final Identifier SWITCH_CAMERA_PACKET_ID = Identifier.of(LuckyWilly.MOD_ID, "switch_camera");
     public static final Id<SwitchCameraPayload> ID = new Id<>(SWITCH_CAMERA_PACKET_ID);

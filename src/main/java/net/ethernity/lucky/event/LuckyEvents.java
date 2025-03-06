@@ -4,10 +4,7 @@ import net.ethernity.lucky.LuckyWilly;
 import net.ethernity.lucky.entity.LuckyWillyEntities;
 import net.ethernity.lucky.entity.effect.LuckyWillyEffects;
 import net.ethernity.lucky.event.armor.ArmorLuckyEvents;
-import net.ethernity.lucky.event.global.ArmorStandEvent;
-import net.ethernity.lucky.event.global.CreeperFallEvent;
-import net.ethernity.lucky.event.global.ExplosionEvent;
-import net.ethernity.lucky.event.global.SwitchCameraEvent;
+import net.ethernity.lucky.event.global.*;
 import net.ethernity.lucky.event.vanilla.VanillaLuckyEvents;
 import net.ethernity.lucky.event.weapon.WeaponLuckyEvents;
 import net.ethernity.lucky.event.willy.WillyLuckyEvents;
@@ -47,8 +44,8 @@ public class LuckyEvents {
     public static final LuckyEvent COOKED_FOOD_EVENT = register(
             "cooked_food_event", LuckyEventBuilder.create(1)
                     .dropStack(Items.COOKED_BEEF.getDefaultStack().copyWithCount(6))
-                    .dropStack(Items.CHICKEN.getDefaultStack().copyWithCount(8))
-                    .dropStack(Items.PORKCHOP.getDefaultStack().copyWithCount(2))
+                    .dropStack(Items.COOKED_CHICKEN.getDefaultStack().copyWithCount(8))
+                    .dropStack(Items.COOKED_PORKCHOP.getDefaultStack().copyWithCount(2))
     );
 
     public static final LuckyEvent GOLDEN_APPLE_EVENT = register(
@@ -62,9 +59,17 @@ public class LuckyEvents {
                     .spawnMob(EntityType.CREEPER)
                     .spawnMob(EntityType.LIGHTNING_BOLT)
     );
+    public static final LuckyEvent BUCKETS_EVENT = register(
+            "buckets_event", LuckyEventBuilder.create(1)
+                    .dropStack(Items.WATER_BUCKET)
+                    .dropStack(Items.LAVA_BUCKET)
+                    .dropStack(Items.POWDER_SNOW_BUCKET)
+    );
     public static final LuckyEvent CREEPER_FALL_EVENT = register("creeper_fall_event", CreeperFallEvent::new);
     public static final LuckyEvent EXPLOSION_EVENT = register("explosion_event", ExplosionEvent::new);
     public static final LuckyEvent SWITCH_CAMERA_EVENT = register("switch_camera_event", SwitchCameraEvent::new);
+    public static final LuckyEvent MINI_SPIDERS_EVENT = register("mini_spiders_event", MiniSpidersEvent::new);
+    public static final LuckyEvent GIANTS_BATTLE_EVENT = register("giants_battle_event", GiantsBattleEvent::new);
 
     public static final LuckyEvent TINY_SCALE_EVENT = register(
             "tiny_scale_event", LuckyEventBuilder.create(0)

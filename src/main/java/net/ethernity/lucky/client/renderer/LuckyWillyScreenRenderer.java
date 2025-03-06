@@ -13,21 +13,21 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenRenderer {
+public class LuckyWillyScreenRenderer {
     private static int tick = 0;
     private static boolean started = false;
     private static final List<Identifier> screamer = new ArrayList<>();
     private static final int TEXTURE_WIDTH = 800;
     private static final int TEXTURE_HEIGHT = 873;
 
-    public static void init() {
+    public static void initialize() {
         for (int i = 0; i <= 30; i++) {
             Identifier identifier = Identifier.of(LuckyWilly.MOD_ID, "textures/screamer/frame_%s_delay-0.03s.png".formatted(i));
             screamer.add(identifier);
         }
 
-        HudRenderCallback.EVENT.register(ScreenRenderer::render);
-        ClientTickEvents.END_CLIENT_TICK.register(ScreenRenderer::tick);
+        HudRenderCallback.EVENT.register(LuckyWillyScreenRenderer::render);
+        ClientTickEvents.END_CLIENT_TICK.register(LuckyWillyScreenRenderer::tick);
     }
 
     private static void render(DrawContext drawContext, RenderTickCounter renderTickCounter) {
