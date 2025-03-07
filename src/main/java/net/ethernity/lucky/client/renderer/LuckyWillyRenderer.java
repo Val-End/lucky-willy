@@ -7,5 +7,6 @@ public class LuckyWillyRenderer {
     public static void initialize() {
         EntityRendererRegistry.register(LuckyWillyEntities.TROTUMAN, TrotumanRenderer::new);
         EntityRendererRegistry.register(LuckyWillyEntities.PAINTING, PaintingRenderer::new);
+        EntityRendererRegistry.register(LuckyWillyEntities.GOOD_PAINTING, GoodPaintingRenderer::new);
     }
 }

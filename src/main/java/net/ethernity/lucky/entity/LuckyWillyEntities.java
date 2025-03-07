@@ -22,6 +22,11 @@ public class LuckyWillyEntities {
                     .dimensions(0.8F, 0.3F)
     );
 
+    public static final EntityType<GoodPaintingEntity> GOOD_PAINTING = register(
+            "painting", EntityType.Builder.create(GoodPaintingEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.8F, 0.3F)
+    );
+
 
     private static EntityType register(String id, EntityType.Builder builder) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(LuckyWilly.MOD_ID, id), builder.build(id));
@@ -34,5 +39,6 @@ public class LuckyWillyEntities {
     private static void registerAttributes() {
         FabricDefaultAttributeRegistry.register(TROTUMAN, TrotumanEntity.createTrotumanAttributes());
         FabricDefaultAttributeRegistry.register(PAINTING, PaintingEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(GOOD_PAINTING, GoodPaintingEntity.createAttributes());
     }
 }

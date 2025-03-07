@@ -96,6 +96,11 @@ public class LuckyEvents {
                     .spawnMob(LuckyWillyEntities.PAINTING)
     );
 
+    public static final LuckyEvent GOOD_PAINTING_EVENT = register(
+            "good_painting_event", LuckyEventBuilder.create(-1)
+                    .spawnMob(LuckyWillyEntities.GOOD_PAINTING)
+    );
+
     public static Identifier getId(LuckyEvent type) {
         return LuckyWillyRegistries.LUCKY_EVENT.getId(type);
     }
